@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ربنا بيكلمك | بوابة النور</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Reem+Kufi&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Amiri', serif;
+      background: linear-gradient(135deg, #ffe6f0, #fcddec, #f9cfe4);
+      overflow-x: hidden;
+      color: #6d2c50;
+      padding-bottom: 80px;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.2);
+      text-align: center;
+      padding: 40px 20px 20px;
+      border-bottom: 2px dashed #ffc0cb;
+      box-shadow: 0 10px 20px rgba(255, 192, 203, 0.3);
+    }
+
+    .header h1 {
+      font-family: 'Reem Kufi', sans-serif;
+      font-size: 3rem;
+      color: #b24e7f;
+      text-shadow: 0 0 10px rgba(255, 192, 203, 0.4);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #a76687;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 40px auto;
+      max-width: 1200px;
+      gap: 40px;
+    }
+
+    .card {
+      background: linear-gradient(160deg, #fff0f5, #ffe4ec);
+      border-radius: 30px;
+      padding: 30px;
+      width: 500px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(255, 182, 193, 0.3);
+      transition: all 0.3s ease;
+      border: 2px dashed #f9bdd5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 182, 193, 0.5);
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #9a3c66;
+      text-shadow: 0 0 5px rgba(255, 182, 193, 0.3);
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #74445e;
+      margin-bottom: 20px;
+    }
+
+    .card a {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(145deg, #ffb6c1, #f69dc3);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    .card a:hover {
+      background: linear-gradient(145deg, #ff96ad, #f36da0);
+    }
+
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      animation: float 6s ease-in-out infinite;
+      color: #e89bb2;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #b15b7a;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px 20px;
+      border-top: 2px dashed #ffc0cb;
+    }
+
+    .floating-heart {
+      position: absolute;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.15;
+      color: #ffb6c1;
+      font-size: 3rem;
+    }
+
+    .heart1 {
+      top: 20px;
+      left: 30px;
+      animation-delay: 0s;
+    }
+
+    .heart2 {
+      bottom: 20px;
+      right: 40px;
+      animation-delay: -2s;
+    }
+
+    .heart3 {
+      top: 50%;
+      right: 10%;
+      animation-delay: -1s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .back-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #ff85a1;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(255, 105, 135, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.1);
+      background: #ff6f91;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .card h2 {
+        font-size: 1.6rem;
+      }
+
+      .card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ربنا بيكلمك</h1>
+    <p class="tagline">مصدرك اليومي للإيمان، من القرآن الكريم والأحاديث الشريفة</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="icon">📖</div>
+      <h2>المصحف الشريف</h2>
+      <p>تصفح القرآن الكريم كاملًا مع تفسير الآيات، وخط واضح، وتنقل سهل</p>
+      <a href="https://surahquran.com/" target="_blank">ادخل الآن</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">📜</div>
+      <h2>الأحاديث الشريفة</h2>
+      <p>استعرض أحاديث نبوية موثوقة، مرتبة موضوعيًا مع الشرح والتخريج</p>
+      <a href="https://hadeethenc.com/ar/browse/category/2" target="_blank">تصفّح الآن</a>
+    </div>
+  </div>
+
+  <!-- زينة طايرة -->
+  <div class="floating-heart heart1">💖</div>
+  <div class="floating-heart heart2">🌸</div>
+  <div class="floating-heart heart3">💞</div>
+
+  <div class="footer">
+    صُنع بحُب لآية 💕
+  </div>
+
+  <a class="back-btn" href="index.html" title="العودة للصفحة الرئيسية">↩</a>
+</body>
+</html>
