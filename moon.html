@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>جدول يومك - moon.html</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+body {
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg, #ffe6f0, #fff4f9);
+  color: #5c2a4b;
+  padding: 20px;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  padding: 30px 10px;
+  background: #ffd6e8;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(255, 192, 203, 0.4);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #9b3d6c;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #6a2c50;
+}
+
+section {
+  background: #ffffff;
+  border: 2px dashed #f9bdd5;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(255, 192, 203, 0.1);
+}
+
+section h2 {
+  margin-bottom: 15px;
+  color: #b24e7f;
+  font-size: 1.5rem;
+}
+
+input[type="text"],
+select {
+  padding: 10px;
+  width: 90%;
+  border: 1px solid #ffc2d1;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  background-color: #fff9fb;
+  color: #4a2d3e;
+}
+
+button {
+  background-color: #ff9cb2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff7599;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #f9bdd5;
+  padding: 10px;
+  text-align: center;
+}
+
+.azkar-group label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.quran-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #e48bbd;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.quran-link:hover {
+  background-color: #c66499;
+}
+
+ul#taskList {
+  list-style: none;
+  padding: 0;
+}
+
+ul#taskList li {
+  background: #ffeef5;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul#taskList li span {
+  flex-grow: 1;
+}
+
+ul#taskList li button {
+  background: #ffb3c6;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 0.9rem;
+}
+
+progress {
+  width: 100%;
+  height: 25px;
+  margin-top: 10px;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ffe6f0;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ff8db1;
+  border-radius: 10px;
+}
+
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #ff85a1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(255, 105, 135, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #e95d85;
+}
+
+@media screen and (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  section h2 {
+    font-size: 1.3rem;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌙 جدول يومك مع القمر</h1>
+    <p>نظم يومك بين الروحانيات والإنتاجية 💖</p>
+  </header>
+
+  <!-- ✅ هدف اليوم -->
+  <section class="goal">
+    <h2>🎯 هدف اليوم</h2>
+    <input type="text" id="dailyGoal" placeholder="اكتب هدفك الرئيسي هنا...">
+  </section>
+
+  <!-- ✅ جدول اليوم الكامل -->
+  <section class="schedule">
+    <h2>🕒 جدول المهام اليومية</h2>
+    <table id="dailyTable">
+      <thead>
+        <tr>
+          <th>الوقت</th>
+          <th>المهمة</th>
+          <th>تم؟</th>
+          <th>ملاحظات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- هيتم ملء الجدول أوتوماتيك من JS -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ✅ الأذكار -->
+  <section class="azkar">
+    <h2>📿 أذكار اليوم</h2>
+    <div class="azkar-group">
+      <label><input type="checkbox"> أذكار الصباح</label>
+      <label><input type="checkbox"> أذكار المساء</label>
+      <label><input type="checkbox"> بعد الصلاة</label>
+    </div>
+  </section>
+
+  <!-- ✅ ورد اليوم من القرآن -->
+  <section class="quran">
+    <h2>📖 ورد القرآن</h2>
+    <label>عدد الآيات:
+      <select id="verseCount">
+        <option>5</option>
+        <option>10</option>
+        <option>صفحة كاملة</option>
+      </select>
+    </label>
+    <br/>
+    <label>السورة المقروءة:
+      <input type="text" id="suraName" placeholder="اكتب اسم السورة">
+    </label>
+    <br/>
+    <a href="https://surahquran.com/" target="_blank" class="quran-link">افتح المصحف</a>
+  </section>
+
+  <!-- ✅ مهام اليوم -->
+  <section class="todo">
+    <h2>📓 مهام اليوم</h2>
+    <input type="text" id="taskInput" placeholder="اكتب مهمة جديدة">
+    <button onclick="addTask()">إضافة</button>
+    <ul id="taskList"></ul>
+  </section>
+
+  <!-- ✅ مؤشر الإنجاز -->
+  <section class="progress-section">
+    <h2>📈 معدل الإنجاز</h2>
+    <progress id="progressBar" max="100" value="0"></progress>
+    <p id="progressText">0%</p>
+  </section>
+
+  <!-- ✅ رسائل متغيرة -->
+  <section class="motivation">
+    <h2>✨ رسالة اليوم</h2>
+    <p id="quoteBox">جارٍ التحميل...</p>
+  </section>
+
+  <!-- ✅ زر رجوع -->
+  <a href="index.html" class="back-btn" title="العودة للصفحة الرئيسية">↩ العودة</a>
+
+  <script>
+<script>
+// 🕒 جدول اليوم التلقائي
+const tasks = [
+  { time: "5:00 ص", task: "صلاة الفجر + أذكار الصباح" },
+  { time: "7:00 ص", task: "رياضة خفيفة" },
+  { time: "9:00 ص", task: "شغل / مذاكرة" },
+  { time: "12:00 م", task: "صلاة الظهر + راحة" },
+  { time: "3:00 م", task: "قراءة أو متابعة مهام" },
+  { time: "5:00 م", task: "صلاة العصر" },
+  { time: "6:00 م", task: "وقت عائلي أو مشي" },
+  { time: "7:00 م", task: "المغرب + أذكار المساء" },
+  { time: "9:00 م", task: "العشاء + مراجعة اليوم" },
+  { time: "10:00 م", task: "دعاء + نية ليوم جديد" },
+];
+
+// بناء جدول اليوم
+function createDailyTable() {
+  const tbody = document.querySelector("#dailyTable tbody");
+  tbody.innerHTML = "";
+  tasks.forEach((item, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.time}</td>
+      <td>${item.task}</td>
+      <td><input type="checkbox" class="day-check" onchange="updateProgress()"></td>
+      <td><input type="text" placeholder="ملاحظة..."></td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// حفظ هدف اليوم
+const goalInput = document.getElementById("dailyGoal");
+goalInput.value = localStorage.getItem("goal") || "";
+goalInput.addEventListener("input", () => {
+  localStorage.setItem("goal", goalInput.value);
+});
+
+// إضافة مهمة جديدة وتخزينها
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const value = taskInput.value.trim();
+  if (value === "") return;
+
+  const tasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
+  tasks.push(value);
+  localStorage.setItem("todoTasks", JSON.stringify(tasks));
+  taskInput.value = "";
+  showToast("تمت إضافة المهمة ✅");
+  renderTasks();
+  updateProgress();
+}
+
+// عرض المهام من localStorage
+function renderTasks() {
+  const taskList = document.getElementById("taskList");
+  const tasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
+  taskList.innerHTML = "";
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span>${task}</span>
+      <button onclick="deleteTask(${index})">🗑</button>
+    `;
+    taskList.appendChild(li);
+  });
+}
+
+// حذف مهمة
+function deleteTask(index) {
+  const tasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
+  tasks.splice(index, 1);
+  localStorage.setItem("todoTasks", JSON.stringify(tasks));
+  renderTasks();
+  updateProgress();
+}
+
+// مؤشر الإنجاز
+function updateProgress() {
+  const checks = document.querySelectorAll(".day-check");
+  const checked = [...checks].filter(c => c.checked).length;
+
+  const savedTasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
+  const progress = Math.round((checked / (checks.length + savedTasks.length)) * 100);
+
+  document.getElementById("progressBar").value = progress || 0;
+  document.getElementById("progressText").innerText = `${progress || 0}%`;
+}
+
+// رسالة اليوم
+const quotes = [
+  "ابدأ يومك بابتسامة، فالله لا يُضيّع من أحسن الظن به 💫",
+  "كل لحظة تقربك من هدفك تستحق المحاولة!",
+  "بالصبر واليقين تُنال أعظم الأماني",
+  "لا يوجد وقت مناسب للبدء، فقط ابدأ الآن!",
+  "قل بسم الله، وابدأ 💪",
+];
+document.getElementById("quoteBox").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+// إشعار بسيط عند إضافة مهمة
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerText = message;
+  toast.style.position = "fixed";
+  toast.style.bottom = "30px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+  toast.style.background = "#e48bbd";
+  toast.style.color = "white";
+  toast.style.padding = "10px 20px";
+  toast.style.borderRadius = "20px";
+  toast.style.fontWeight = "bold";
+  toast.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+// تحميل كل البيانات عند فتح الصفحة
+window.onload = () => {
+  createDailyTable();
+  renderTasks();
+  updateProgress();
+};
+</script>
+  </script>
+</body>
+</html>
