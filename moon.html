@@ -193,8 +193,8 @@ progress::-webkit-progress-value {
 </head>
 <body>
   <header>
-    <h1>🌙 جدول يومك مع القمر</h1>
-    <p>نظم يومك بين الروحانيات والإنتاجية 💖</p>
+    <h1>🌙 جدول يومك يا قمر</h1>
+    <p>اوعديني انك هتحاولي علي قد ما تقدري يا اية💖</p>
   </header>
 
   <!-- ✅ هدف اليوم -->
@@ -274,7 +274,6 @@ progress::-webkit-progress-value {
   <a href="index.html" class="back-btn" title="العودة للصفحة الرئيسية">↩ العودة</a>
 
   <script>
-<script>
 // 🕒 جدول اليوم التلقائي
 const tasks = [
   { time: "5:00 ص", task: "صلاة الفجر + أذكار الصباح" },
@@ -289,28 +288,81 @@ const tasks = [
   { time: "10:00 م", task: "دعاء + نية ليوم جديد" },
 ];
 
+// إشعار بسيط عند إضافة مهمة
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerText = message;
+  toast.style.position = "fixed";
+  toast.style.bottom = "30px";
+  toast.style.right = "30px";
+  toast.style.background = "#e48bbd";
+  toast.style.color = "white";
+  toast.style.padding = "10px 20px";
+  toast.style.borderRadius = "20px";
+  toast.style.fontWeight = "bold";
+  toast.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
+  toast.style.zIndex = "1000";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
 // بناء جدول اليوم
 function createDailyTable() {
   const tbody = document.querySelector("#dailyTable tbody");
   tbody.innerHTML = "";
+  
+  // تحميل الحالة المحفوظة إن وجدت
+  const savedChecks = JSON.parse(localStorage.getItem("scheduleChecks")) || Array(tasks.length).fill(false);
+  const savedNotes = JSON.parse(localStorage.getItem("scheduleNotes")) || Array(tasks.length).fill("");
+  
   tasks.forEach((item, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${item.time}</td>
       <td>${item.task}</td>
-      <td><input type="checkbox" class="day-check" onchange="updateProgress()"></td>
-      <td><input type="text" placeholder="ملاحظة..."></td>
+      <td><input type="checkbox" class="day-check" ${savedChecks[index] ? 'checked' : ''}></td>
+      <td><input type="text" placeholder="ملاحظة..." value="${savedNotes[index]}"></td>
     `;
     tbody.appendChild(row);
   });
+  
+  // إضافة مستمعين للأحداث بعد إنشاء الجدول
+  document.querySelectorAll('.day-check').forEach((checkbox, index) => {
+    checkbox.addEventListener('change', () => {
+      updateScheduleState();
+      updateProgress();
+    });
+  });
+  
+  document.querySelectorAll('#dailyTable tbody tr td:nth-child(4) input').forEach((input, index) => {
+    input.addEventListener('input', () => {
+      updateScheduleState();
+    });
+  });
+}
+
+// تحديث حالة الجدول وحفظها
+function updateScheduleState() {
+  const checks = [];
+  const notes = [];
+  
+  document.querySelectorAll('.day-check').forEach(checkbox => {
+    checks.push(checkbox.checked);
+  });
+  
+  document.querySelectorAll('#dailyTable tbody tr td:nth-child(4) input').forEach(input => {
+    notes.push(input.value);
+  });
+  
+  localStorage.setItem("scheduleChecks", JSON.stringify(checks));
+  localStorage.setItem("scheduleNotes", JSON.stringify(notes));
 }
 
 // حفظ هدف اليوم
-const goalInput = document.getElementById("dailyGoal");
-goalInput.value = localStorage.getItem("goal") || "";
-goalInput.addEventListener("input", () => {
+function saveGoal() {
+  const goalInput = document.getElementById("dailyGoal");
   localStorage.setItem("goal", goalInput.value);
-});
+}
 
 // إضافة مهمة جديدة وتخزينها
 function addTask() {
@@ -350,18 +402,27 @@ function deleteTask(index) {
   localStorage.setItem("todoTasks", JSON.stringify(tasks));
   renderTasks();
   updateProgress();
+  showToast("تم حذف المهمة ❌");
 }
 
 // مؤشر الإنجاز
 function updateProgress() {
+  // حساب المهام المكتملة في الجدول
+  let completedTasks = 0;
   const checks = document.querySelectorAll(".day-check");
-  const checked = [...checks].filter(c => c.checked).length;
-
+  checks.forEach(checkbox => {
+    if (checkbox.checked) completedTasks++;
+  });
+  
+  // حساب المهام المتبقية في القائمة
   const savedTasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
-  const progress = Math.round((checked / (checks.length + savedTasks.length)) * 100);
+  const totalTasks = tasks.length + savedTasks.length;
+  
+  // حساب النسبة المئوية للإنجاز
+  const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-  document.getElementById("progressBar").value = progress || 0;
-  document.getElementById("progressText").innerText = `${progress || 0}%`;
+  document.getElementById("progressBar").value = progress;
+  document.getElementById("progressText").innerText = `${progress}%`;
 }
 
 // رسالة اليوم
@@ -372,33 +433,22 @@ const quotes = [
   "لا يوجد وقت مناسب للبدء، فقط ابدأ الآن!",
   "قل بسم الله، وابدأ 💪",
 ];
-document.getElementById("quoteBox").innerText = quotes[Math.floor(Math.random() * quotes.length)];
-
-// إشعار بسيط عند إضافة مهمة
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.innerText = message;
-  toast.style.position = "fixed";
-  toast.style.bottom = "30px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.background = "#e48bbd";
-  toast.style.color = "white";
-  toast.style.padding = "10px 20px";
-  toast.style.borderRadius = "20px";
-  toast.style.fontWeight = "bold";
-  toast.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2000);
-}
 
 // تحميل كل البيانات عند فتح الصفحة
 window.onload = () => {
+  // تحميل هدف اليوم
+  const goalInput = document.getElementById("dailyGoal");
+  goalInput.value = localStorage.getItem("goal") || "";
+  goalInput.addEventListener("input", saveGoal);
+  
+  // إنشاء الجدول وعرض المهام
   createDailyTable();
   renderTasks();
   updateProgress();
+  
+  // عرض رسالة اليوم
+  document.getElementById("quoteBox").innerText = quotes[Math.floor(Math.random() * quotes.length)];
 };
-</script>
   </script>
 </body>
 </html>
