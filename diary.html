@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مذكرات آية | دفتر القمر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3, #fbcfe8);
+            color: #6d2c50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23f9a8d480" stroke-width="1" stroke-dasharray="5,5"/><circle cx="20" cy="20" r="3" fill="%23f9a8d4"/><circle cx="70" cy="40" r="4" fill="%23f9a8d4"/><circle cx="50" cy="80" r="2" fill="%23f9a8d4"/><circle cx="85" cy="15" r="3" fill="%23f9a8d4"/><circle cx="10" cy="60" r="2" fill="%23f9a8d4"/><circle cx="40" cy="30" r="3" fill="%23f9a8d4"/></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .diary-header {
+            text-align: center;
+            margin: 15px 0 25px;
+            position: relative;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.1);
+            border: 1px solid #f8d7e9;
+        }
+        
+        .diary-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .diary-title h1 {
+            font-size: 2.5rem;
+            color: #9d4b6b;
+            text-shadow: 0 2px 8px rgba(157, 75, 107, 0.2);
+            position: relative;
+        }
+        
+        .moon-icon {
+            font-size: 2.5rem;
+            color: #f9a8d4;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .diary-subtitle {
+            font-size: 1.2rem;
+            color: #d57a99;
+            margin-bottom: 5px;
+        }
+        
+        .date-display {
+            background: linear-gradient(145deg, #ffffff, #fff9fb);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            color: #9d4b6b;
+            box-shadow: 0 3px 10px rgba(157, 75, 107, 0.1);
+            margin: 10px 0;
+        }
+        
+        .diary-container {
+            background: linear-gradient(145deg, #ffffff, #fff9fb);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(157, 75, 107, 0.15);
+            padding: 25px;
+            margin: 0 auto 40px;
+            width: 95%;
+            max-width: 700px;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #f8d7e9;
+        }
+        
+        .entry-title-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .entry-title {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            border: none;
+            background: rgba(249, 168, 212, 0.1);
+            border-radius: 15px;
+            color: #6d2c50;
+            font-weight: bold;
+            box-shadow: inset 0 2px 5px rgba(157, 75, 107, 0.1);
+        }
+        
+        .entry-title::placeholder {
+            color: #d57a99;
+            opacity: 0.7;
+        }
+        
+        .entry-title:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #f9a8d4;
+        }
+        
+        .entry-content {
+            flex-grow: 1;
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            border: none;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            color: #6d2c50;
+            resize: none;
+            min-height: 300px;
+            box-shadow: inset 0 2px 10px rgba(157, 75, 107, 0.1);
+        }
+        
+        .entry-content:focus {
+            outline: none;
+            box-shadow: inset 0 2px 10px rgba(157, 75, 107, 0.1), 0 0 0 2px #f9a8d4;
+        }
+        
+        .entry-content::placeholder {
+            color: #d57a99;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        .entry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            gap: 15px;
+        }
+        
+        .save-btn {
+            background: linear-gradient(145deg, #f9a8d4, #f48fb1);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.3);
+            transition: all 0.3s ease;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(157, 75, 107, 0.4);
+        }
+        
+        .save-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(157, 75, 107, 0.3);
+        }
+        
+        .new-entry-btn {
+            background: linear-gradient(145deg, #a8d4f9, #8fb1f4);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(75, 107, 157, 0.3);
+            transition: all 0.3s ease;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        
+        .mood-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(249, 168, 212, 0.1);
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(157, 75, 107, 0.1);
+        }
+        
+        .mood-label {
+            font-weight: bold;
+            color: #9d4b6b;
+        }
+        
+        .mood-select {
+            background: white;
+            border: 1px solid #f9a8d4;
+            border-radius: 10px;
+            padding: 5px 10px;
+            color: #6d2c50;
+            cursor: pointer;
+        }
+        
+        .mood-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #f9a8d4;
+        }
+        
+        .entries-container {
+            background: linear-gradient(145deg, #ffffff, #fff9fb);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(157, 75, 107, 0.15);
+            padding: 25px;
+            margin: 0 auto 40px;
+            width: 95%;
+            max-width: 700px;
+            position: relative;
+            border: 1px solid #f8d7e9;
+        }
+        
+        .entries-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #fce7f3;
+        }
+        
+        .entries-title {
+            font-size: 1.8rem;
+            color: #9d4b6b;
+        }
+        
+        .sort-select {
+            background: rgba(249, 168, 212, 0.1);
+            border: 1px solid #f9a8d4;
+            border-radius: 10px;
+            padding: 8px 15px;
+            color: #6d2c50;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .entries-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .entry-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(157, 75, 107, 0.1);
+            border-left: 4px solid #f9a8d4;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .entry-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.2);
+        }
+        
+        .entry-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #f9a8d4;
+        }
+        
+        .entry-item-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #9d4b6b;
+        }
+        
+        .entry-item-date {
+            font-size: 0.9rem;
+            color: #d57a99;
+        }
+        
+        .entry-item-preview {
+            font-size: 1rem;
+            color: #6d2c50;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .delete-entry {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(249, 168, 212, 0.3);
+            color: #9d4b6b;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .delete-entry:hover {
+            background: rgba(244, 67, 54, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .empty-entries {
+            text-align: center;
+            padding: 30px;
+            color: #d57a99;
+            font-size: 1.2rem;
+        }
+        
+        .floating-star {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.15;
+            font-size: 2rem;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .star1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .star2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+        
+        .star3 {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: -4s;
+        }
+        
+        .star4 {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: -6s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+        
+        .encouragement {
+            text-align: center;
+            font-style: italic;
+            margin: 15px 0;
+            color: #d57a99;
+            font-size: 1.1rem;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, #f9a8d4, #f48fb1);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.3);
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(157, 75, 107, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .diary-title h1 {
+                font-size: 2rem;
+            }
+            
+            .moon-icon {
+                font-size: 2rem;
+            }
+            
+            .entry-footer {
+                flex-direction: column;
+            }
+            
+            .mood-container {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateX(-50%) translateY(20px); 
+            }
+            10%, 90% { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(0); 
+            }
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f9a8d4;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.3);
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        
+        .entry-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .edit-btn, .delete-btn {
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .edit-btn {
+            background: rgba(249, 168, 212, 0.2);
+            color: #9d4b6b;
+        }
+        
+        .delete-btn {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+        }
+        
+        .edit-btn:hover {
+            background: rgba(249, 168, 212, 0.4);
+        }
+        
+        .delete-btn:hover {
+            background: rgba(244, 67, 54, 0.2);
+        }
+        
+        /* إضافة تحسينات للعرض على الهواتف */
+        @media (max-width: 480px) {
+            .diary-title h1 {
+                font-size: 1.7rem;
+            }
+            
+            .diary-subtitle {
+                font-size: 1rem;
+            }
+            
+            .date-display {
+                font-size: 0.9rem;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .save-btn, .new-entry-btn {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+            
+            .entries-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نجوم عائمة للزينة -->
+    <div class="floating-star star1">✦</div>
+    <div class="floating-star star2">✦</div>
+    <div class="floating-star star3">✦</div>
+    <div class="floating-star star4">✦</div>
+    
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    
+    <div class="diary-header">
+        <div class="diary-title">
+            <h1>مذكرات آية</h1>
+            <div class="moon-icon">🌙</div>
+        </div>
+        <div class="diary-subtitle">دفتر أسرار القمر الخاص بكِ</div>
+        <div class="date-display" id="currentDate"></div>
+        <p class="encouragement">"اكتبي بحرية، فمذكراتكِ مرآة روحكِ الجميلة"</p>
+    </div>
+    
+    <div class="diary-container">
+        <div class="entry-title-container">
+            <input type="text" class="entry-title" id="entryTitle" placeholder="عنوان اليوم...">
+        </div>
+        
+        <textarea class="entry-content" id="entryContent" placeholder="ابدأي الكتابة هنا... أحاسيسكِ، أفكاركِ، أحلامكِ. هذه المساحة لكِ وحدكِ 🌸"></textarea>
+        
+        <div class="entry-footer">
+            <div class="mood-container">
+                <span class="mood-label">مزاج اليوم:</span>
+                <select class="mood-select" id="moodSelect">
+                    <option value="happy">😊 سعيدة</option>
+                    <option value="excited">🤩 متحمسة</option>
+                    <option value="calm">😌 هادئة</option>
+                    <option value="sad"> زعلانة</option>
+                    <option value="tired">😴 متعبة</option>
+                </select>
+            </div>
+            
+            <button class="save-btn" id="saveBtn">
+                <i class="fas fa-save"></i>
+                حفظ اليوم
+            </button>
+            
+            <button class="new-entry-btn" id="newEntryBtn">
+                <i class="fas fa-plus"></i>
+                مذكرة جديدة
+            </button>
+        </div>
+    </div>
+    
+    <div class="entries-container">
+        <div class="entries-header">
+            <h2 class="entries-title">مذكراتكِ السابقة</h2>
+            <select class="sort-select" id="sortSelect">
+                <option value="newest">الأحدث أولاً</option>
+                <option value="oldest">الأقدم أولاً</option>
+            </select>
+        </div>
+        
+        <div class="entries-list" id="entriesList">
+            <div class="empty-entries" id="emptyMessage">
+                لا توجد مذكرات بعد... ابدأي بكتابة أول مذكراتكِ اليوم!
+            </div>
+        </div>
+    </div>
+<script>
+// عناصر DOM
+const entryTitle = document.getElementById('entryTitle');
+const entryContent = document.getElementById('entryContent');
+const moodSelect = document.getElementById('moodSelect');
+const saveBtn = document.getElementById('saveBtn');
+const newEntryBtn = document.getElementById('newEntryBtn');
+const entriesList = document.getElementById('entriesList');
+const sortSelect = document.getElementById('sortSelect');
+const emptyMessage = document.getElementById('emptyMessage');
+const currentDate = document.getElementById('currentDate');
+
+// تحديث التاريخ
+function updateDate() {
+    const now = new Date();
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+    currentDate.textContent = now.toLocaleDateString('ar-EG', options);
+}
+updateDate();
+
+// تحميل المذكرات من localStorage
+function loadEntries() {
+    const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+
+    if (entries.length === 0) {
+        emptyMessage.style.display = 'block';
+        return;
+    }
+
+    emptyMessage.style.display = 'none';
+    const sortedEntries = [...entries];
+
+    if (sortSelect.value === 'newest') {
+        sortedEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else {
+        sortedEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    entriesList.innerHTML = '';
+    sortedEntries.forEach((entry) => {
+        const entryDate = new Date(entry.date);
+        const formattedDate = entryDate.toLocaleDateString('ar-EG', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        const entryDiv = document.createElement('div');
+        entryDiv.className = 'entry-item';
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'entry-item-header';
+
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'entry-item-title';
+        titleSpan.textContent = entry.title;
+
+        const dateSpan = document.createElement('span');
+        dateSpan.className = 'entry-item-date';
+        dateSpan.textContent = formattedDate;
+
+        headerDiv.appendChild(titleSpan);
+        headerDiv.appendChild(dateSpan);
+
+        const previewP = document.createElement('p');
+        previewP.className = 'entry-item-preview';
+        previewP.textContent = entry.content;
+
+        entryDiv.appendChild(headerDiv);
+        entryDiv.appendChild(previewP);
+
+        entriesList.appendChild(entryDiv);
+    });
+}
+
+// حفظ المذكرة
+saveBtn.addEventListener('click', () => {
+    const title = entryTitle.value.trim();
+    const content = entryContent.value.trim();
+    const mood = moodSelect.value;
+    const date = new Date().toISOString();
+
+    if (!title || !content) {
+        alert('من فضلك اكتبي عنوان ومحتوى المذكرة.');
+        return;
+    }
+
+    const newEntry = {
+        id: Date.now(),
+        title,
+        content,
+        mood,
+        date
+    };
+
+    const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+    entries.push(newEntry);
+    localStorage.setItem('diaryEntries', JSON.stringify(entries));
+
+    entryTitle.value = '';
+    entryContent.value = '';
+    moodSelect.value = 'happy';
+
+    loadEntries();
+    showNotification("تم حفظ المذكرة 💖");
+});
+
+// عرض الإشعار
+function showNotification(message) {
+    const note = document.createElement('div');
+    note.className = 'notification';
+    note.textContent = message;
+    document.body.appendChild(note);
+    setTimeout(() => note.remove(), 3000);
+}
+
+// تحميل عند بدء الصفحة
+window.addEventListener('DOMContentLoaded', loadEntries);
+
+// فرز عند تغيير السورت
+sortSelect.addEventListener('change', loadEntries);
+</script>
+    <script>
+        // عناصر DOM
+        const entryTitle = document.getElementById('entryTitle');
+        const entryContent = document.getElementById('entryContent');
+        const moodSelect = document.getElementById('moodSelect');
+        const saveBtn = document.getElementById('saveBtn');
+        const newEntryBtn = document.getElementById('newEntryBtn');
+        const entriesList = document.getElementById('entriesList');
+        const sortSelect = document.getElementById('sortSelect');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const currentDate = document.getElementById('currentDate');
+        
+        // متغير لتتبع المذكرة الحالية
+        let currentEntryId = null;
+        
+        // عرض التاريخ الحالي
+        function updateDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            currentDate.textContent = now.toLocaleDateString('ar-EG', options);
+        }
+        
+        updateDate();
+        
+        // تحميل المذكرات من localStorage
+        function loadEntries() {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+            
+            if (entries.length === 0) {
+                emptyMessage.style.display = 'block';
+                return;
+            }
+            
+            emptyMessage.style.display = 'none';
+            
+            // فرز المذكرات حسب الاختيار
+            const sortedEntries = [...entries];
+            if (sortSelect.value === 'newest') {
+                sortedEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else {
+                sortedEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+            }
+            
+            // عرض المذكرات
+            entriesList.innerHTML = '';
+            sortedEntries.forEach((entry) => {
+                const entryDate = new Date(entry.date);
+                const formattedDate = entryDate.toLocaleDateString('ar-EG', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+           
