@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة المتابعة | آية 2007</title>  <!-- Fonts & Styles -->  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #6c5ce7;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+header .date {
+  font-size: 16px;
+  color: #888;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #2d3436;
+  border-right: 4px solid #6c5ce7;
+  padding-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: right;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.online {
+  background-color: #2ecc71;
+  box-shadow: 0 0 5px #2ecc71;
+}
+
+.offline {
+  background-color: #ccc;
+}
+
+  </style>  <!-- Firebase -->  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script></head>
+<body>  <!-- Header -->  <header>
+    <h1>لوحة المتابعة</h1>
+    <div class="date" id="current-date"></div>
+  </header>  <!-- Messages Section -->  <div class="card">
+    <h2>📩 رسائل من صفحة "معاكي"</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>📅 التاريخ</th>
+          <th>✉️ الرسالة</th>
+        </tr>
+      </thead>
+      <tbody id="messagesTableBody"></tbody>
+    </table>
+  </div>  <!-- Visits Section -->  <div class="card">
+    <h2>📊 سجل الزيارات</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>🕒 وقت الدخول</th>
+          <th>⏱️ المدة (ث)</th>
+          <th>🟢 الحالة</th>
+        </tr>
+      </thead>
+      <tbody id="visitsTableBody"></tbody>
+    </table>
+  </div>  <!-- Firebase Config & Data -->  <script>
+    // 1. Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyA-9y3Y6Uc6OTYSbmfNtupfcWHy-9s9nsg",
+      authDomain: "aya2007.firebaseapp.com",
+      projectId: "aya2007",
+      storageBucket: "aya2007.appspot.com",
+      messagingSenderId: "545068053684",
+      appId: "1:545068053684:web:9df8a66201d8006fd313e1"
+    };
+
+    // 2. Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // 3. Show current date
+    const now = new Date();
+    document.getElementById('current-date').textContent = now.toLocaleDateString('ar-EG', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // 4. Load Messages
+    function loadMessages() {
+      const table = document.getElementById("messagesTableBody");
+      table.innerHTML = "";
+
+      db.collection("messages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(snapshot => {
+          snapshot.forEach(doc => {
+            const msg = doc.data();
+            const time = msg.timestamp?.toDate()?.toLocaleString('ar-EG') || '—';
+            const text = msg.text || '';
+            const row = `<tr><td>${time}</td><td>${text}</td></tr>`;
+            table.innerHTML += row;
+          });
+        });
+    }
+
+    // 5. Load Visits
+    function loadVisits() {
+      const table = document.getElementById("visitsTableBody");
+      table.innerHTML = "";
+
+      db.collection("visitors")
+        .orderBy("enterTime", "desc")
+        .onSnapshot(snapshot => {
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const enter = data.enterTime?.toDate();
+            const exit = data.exitTime?.toDate();
+            const duration = data.durationSeconds || 0;
+            const isOnline = !exit;
+
+            const row = `
+              <tr>
+                <td>${enter?.toLocaleString('ar-EG') || '—'}</td>
+                <td>${duration}</td>
+                <td><span class="status-indicator ${isOnline ? 'online' : 'offline'}"></span></td>
+              </tr>
+            `;
+            table.innerHTML += row;
+          });
+        });
+    }
+
+    // 6. Init
+    loadMessages();
+    loadVisits();
+  </script></body>
+</html>

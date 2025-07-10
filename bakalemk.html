@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بكلمك - يومياتي اليومية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6, #ffd6e7);
+            color: #6d2c50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23ffb6c180" stroke-width="1" stroke-dasharray="5,5"/><circle cx="20" cy="20" r="3" fill="%23ffb6c1"/><circle cx="70" cy="40" r="4" fill="%23ffb6c1"/><circle cx="50" cy="80" r="2" fill="%23ffb6c1"/><circle cx="85" cy="15" r="3" fill="%23ffb6c1"/><circle cx="10" cy="60" r="2" fill="%23ffb6c1"/><circle cx="40" cy="30" r="3" fill="%23ffb6c1"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 20px 0 30px;
+            position: relative;
+        }
+        
+        .name-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1 {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.8rem;
+            color: #9d4b6b;
+            text-shadow: 0 2px 8px rgba(157, 75, 107, 0.2);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 10px;
+        }
+        
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(157, 75, 107, 0.15);
+            border: 1px solid #f8d7e9;
+            font-size: 1.3rem;
+            line-height: 1.9;
+            text-align: center;
+            position: relative;
+        }
+        
+        .intro-text::before {
+            content: "❝";
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3.5rem;
+            color: #ffb6c1;
+            opacity: 0.3;
+        }
+        
+        .intro-text::after {
+            content: "❞";
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            font-size: 3.5rem;
+            color: #ffb6c1;
+            opacity: 0.3;
+            transform: rotate(180deg);
+        }
+        
+        .today-entry {
+            width: 90%;
+            max-width: 800px;
+            background: linear-gradient(145deg, #ffffff, #fff9fb);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(157, 75, 107, 0.15);
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #f8d7e9;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .today-entry:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(157, 75, 107, 0.25);
+        }
+        
+        .entry-date {
+            background: #ffd6e7;
+            color: #9d4b6b;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 3px 10px rgba(157, 75, 107, 0.1);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .entry-content {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            color: #6d2c50;
+            padding: 10px 0;
+        }
+        
+        .entry-content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .entry-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .floating-rose {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 10rem;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .rose1 {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .rose2 {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #ffffff, #fff0f5);
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: #9d4b6b;
+            box-shadow: 0 4px 10px rgba(157, 75, 107, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(157, 75, 107, 0.2);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(157, 75, 107, 0.1);
+            border: 1px solid #f8d7e9;
+        }
+        
+        .footer-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #9d4b6b;
+            line-height: 1.5;
+        }
+        
+        .disclaimer {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #d57a99;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .intro-text {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .today-entry {
+                padding: 30px 20px;
+            }
+            
+            .entry-content {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .entry-date {
+                font-size: 1.1rem;
+                padding: 8px 15px;
+            }
+            
+            .today-entry {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- وردات عائمة للزينة -->
+    <div class="floating-rose rose1">🌹</div>
+    <div class="floating-rose rose2">🌹</div>
+    
+    <div class="header">
+        <div class="name-container">
+            <h1>بكلمك</h1>
+        </div>
+    </div>
+    
+    <div class="intro-text">
+        <p>كل يوم هكتب كل حاجة حصلت ف يومي زي ما كنت بحكيلك.. بليل كل يوم الساعة ١٠ هكتب ليكي ملخص يومي كله و اللي حصل فيه، حاجات حصلت، مواقف تفرح وتزعل، حاجات صغيرة كنت بشاركها معاكي طول الوقت، سواء كانت إنجازاته الصغيرة او تقدمي ف اي حاجه ف حياتي او خسايري او اي حاجه، بصراحة مش شايف حد مهم بالنسبة ليا اقدر اعمل معاه كدا، اتعودت اعمل ده معاكي و ده كان بيحسسني ان انا مبسوط</p>
+        <p class="disclaimer">ملحوظة: الدخول هنا اختياري، مش ملزمة تقري اي حاجه.. 
+        انا بس هكلمك و هعتبر انك بتشوفي كل حاجة...</p>
+    </div>
+    
+    <div class="today-entry">
+        <div class="entry-date" id="todayDate">يوم الخميس، ١١ يوليو ٢٠٢٤</div>
+        <div class="entry-content" id="diaryContent">
+            <p>و بس ي وردايتي، قولتلك سلام 
+            
+          ملحوظة : اللي بيكون عايز حاجة بجد ، مش بيسيبها للزمن هو اللي يقرر ، مش هسيبك للزمن انا، طول ما انتي ماقولتيش مش حابة سيرتي, انا مش هحلك..</pة في حياتي.</p>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <a href="index.html" class="nav-btn">الصفحة الرئيسية</a>
+        <a href="diary.html" class="nav-btn">مذكرات</a>
+        <a href="moon.html" class="nav-btn">تنظيم يوم القمر</a>
+        <a href="god.html" class="nav-btn">ربنا بيكلمك</a>
+        <a href="maaky.html" class="nav-btn">معاكي</a>
+        <a href="tsaaly.html" class="nav-btn">سلي وقتك يا وردايتي</a>
+    </div>
+    
+    <div class="footer">
+        <p class="footer-text">تذكري دائما يا وردايةِ، يحل لكي ما لا يحل لغيرك</p>
+    </div>
+
+    <script>
+        // تحديث التاريخ تلقائياً
+        const todayDate = document.getElementById('todayDate');
+        const now = new Date();
+        
+        // خيارات تنسيق التاريخ
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        
+        // تنسيق التاريخ باللغة العربية
+        todayDate.textContent = now.toLocaleDateString('ar-EG', options);
+        
+        // يمكنك تحديث المحتوى يدوياً هنا كل يوم:
+        // 1. ابحث عن id="diaryContent"
+        // 2. قم بتحديث النص داخل <div class="entry-content">
+        // 3. احفظ الملف
+        // 4. سيتم عرض المحتوى الجديد مباشرة
+    </script>
+</body>
+</html>
