@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أحلام آية - عالم أحلامك</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #f9f0ff, #e6f0ff);
+      color: #5a4a6a;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(143, 92, 214, 0.15);
+      overflow: hidden;
+      margin: 20px auto;
+      position: relative;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #8f5cd6, #6a5af9);
+      color: white;
+      text-align: center;
+      padding: 25px 20px;
+      position: relative;
+    }
+    
+    .header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    
+    .dream-section {
+      padding: 30px;
+    }
+    
+    .dream-card {
+      background: linear-gradient(135deg, #f1e8ff, #e3eeff);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(143, 92, 214, 0.1);
+      border-left: 5px solid #8f5cd6;
+    }
+    
+    .dream-card h3 {
+      color: #8f5cd6;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .dream-card h3 i {
+      font-size: 1.6rem;
+    }
+    
+    .dream-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #5a4a6a;
+    }
+    
+    .input-section {
+      background: #f8f5ff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(143, 92, 214, 0.08);
+    }
+    
+    .input-section h2 {
+      color: #6a5af9;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    
+    .dream-input-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    #dreamInput {
+      flex: 1;
+      padding: 15px 20px;
+      border: 2px solid #d0c0f0;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-family: 'Cairo', sans-serif;
+      color: #5a4a6a;
+      transition: all 0.3s;
+      background: white;
+    }
+    
+    #dreamInput:focus {
+      outline: none;
+      border-color: #8f5cd6;
+      box-shadow: 0 0 0 3px rgba(143, 92, 214, 0.2);
+    }
+    
+    #dreamInput::placeholder {
+      color: #a99cc0;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, #8f5cd6, #6a5af9);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(143, 92, 214, 0.4);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .encouragement {
+      background: #fff8e6;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 30px;
+      border-left: 5px solid #ffb74d;
+    }
+    
+    .encouragement h3 {
+      color: #ff9800;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .encouragement p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #7d6a4a;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #8d7ca8;
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
+    
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .dream-card, .input-section, .encouragement {
+        padding: 20px;
+      }
+      
+      .dream-input-container {
+        flex-direction: column;
+      }
+      
+      .submit-btn {
+        padding: 15px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-moon"></i> أحلام آية</h1>
+      <p>اجباري عموما</p>
+    </div>
+    
+    <div class="dream-section">
+      <div class="dream-card">
+        <h3><i class="fas fa-calendar-day"></i> حلم اليوم</h3>
+        <p>.</p>
+      </div>
+      
+      <div class="input-section">
+        <h2><i class="fas fa-cloud-moon"></i> اكتبي حلمك يا آية 💭</h2>
+        <div class="dream-input-container">
+          <input type="text" id="dreamInput" placeholder="مثلاً: نفسي أكون دكتورة 🩺">
+          <button class="submit-btn" onclick="submitDream()">
+            <i class="fas fa-paper-plane"></i> إرسال الحلم
+          </button>
+        </div>
+      </div>
+      
+      <div class="encouragement">
+        <h3><i class="fas fa-heart"></i> رسالة خاصة لكِ</h3>
+        <p>كل يوم أكتبي حلم جديد أو هدف نفسك توصلي ليه ، كل حاجة هتكتبيها هكتبها ف ورقة و اشيلها ف بوكس خاص بيا ، ف وقت من الاوقات كل حاجة هتبقي حقيقة ، لإنك تستاهلي كل خير ي وردتي.</p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>يحل لكي ما لا يحل لغيرك ي وردايتي</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA-9y3Y6Uc6OTYSbmfNtupfcWHy-9s9nsg",
+      authDomain: "aya2007.firebaseapp.com",
+      projectId: "aya2007",
+      storageBucket: "aya2007.firebasestorage.app",
+      messagingSenderId: "545068053684",
+      appId: "1:545068053684:web:9df8a66201d8006fd313e1",
+      measurementId: "G-QZY05KB9YE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // إنشاء النجوم المتلألئة
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      const starCount = 100;
+      
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // حجم عشوائي بين 1px و 3px
+        const size = Math.random() * 2 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // موضع عشوائي
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        
+        // تأخير عشوائي للوميض
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        
+        starsContainer.appendChild(star);
+      }
+    }
+    
+    createStars();
+
+    async function submitDream() {
+      const input = document.getElementById("dreamInput");
+      const dream = input.value.trim();
+      
+      if (!dream) {
+        showMessage("اكتبي حلمك الأول يا آية 🌙", "info");
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "messages"), {
+          text: dream,
+          status: "unread",
+          timestamp: serverTimestamp()
+        });
+        
+        showMessage("تم إرسال الحلم بنجاح ✅ سيتم تحقيقه بإذن الله", "success");
+        input.value = "";
+      } catch (e) {
+        console.error("خطأ أثناء إرسال الحلم:", e);
+        showMessage("في مشكلة، جربي تاني 💔", "error");
+      }
+    }
+
+    function showMessage(message, type) {
+      // إنشاء عنصر الرسالة
+      const messageEl = document.createElement('div');
+      messageEl.textContent = message;
+      messageEl.style.position = 'fixed';
+      messageEl.style.top = '20px';
+      messageEl.style.left = '50%';
+      messageEl.style.transform = 'translateX(-50%)';
+      messageEl.style.padding = '15px 25px';
+      messageEl.style.borderRadius = '10px';
+      messageEl.style.fontFamily = 'Cairo, sans-serif';
+      messageEl.style.fontWeight = 'bold';
+      messageEl.style.fontSize = '1.1rem';
+      messageEl.style.zIndex = '1000';
+      messageEl.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+      messageEl.style.transition = 'all 0.3s';
+      
+      // تخصيص الألوان حسب نوع الرسالة
+      if (type === "success") {
+        messageEl.style.backgroundColor = '#4CAF50';
+        messageEl.style.color = 'white';
+      } else if (type === "error") {
+        messageEl.style.backgroundColor = '#f44336';
+        messageEl.style.color = 'white';
+      } else {
+        messageEl.style.backgroundColor = '#2196F3';
+        messageEl.style.color = 'white';
+      }
+      
+      document.body.appendChild(messageEl);
+      
+      // إخفاء الرسالة بعد 3 ثوانٍ
+      setTimeout(() => {
+        messageEl.style.opacity = '0';
+        messageEl.style.transform = 'translateX(-50%) translateY(-20px)';
+        setTimeout(() => {
+          document.body.removeChild(messageEl);
+        }, 300);
+      }, 3000);
+    }
+
+    window.submitDream = submitDream;
+  </script>
+</body>
+</html>

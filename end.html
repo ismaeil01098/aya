@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نهاية العمل الدرامي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(50, 50, 50, 0.1) 0%, rgba(0, 0, 0, 0) 25%),
+                radial-gradient(circle at 80% 70%, rgba(50, 50, 50, 0.1) 0%, rgba(0, 0, 0, 0) 25%);
+        }
+        
+        #start-btn {
+            background: #111;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        #start-btn:hover {
+            background: #222;
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        #dramatic-end {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            padding: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            animation: fadeInOut 8s forwards;
+            color: #ccc;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            70% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        #credits-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .credit {
+            font-size: 1.8rem;
+            margin: 8px 0;
+            opacity: 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+            animation: riseUp 12s linear forwards;
+            color: #fff;
+            font-weight: normal;
+            text-align: center;
+            width: 100%;
+            padding: 5px 0;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes riseUp {
+            0% { 
+                transform: translateY(100vh); 
+                opacity: 0;
+            }
+            10% { 
+                opacity: 1;
+            }
+            80% { 
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-100vh); 
+                opacity: 0;
+            }
+        }
+        
+        .heart {
+            color: #ff5555;
+            animation: heartbeat 1.8s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.1); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        #audio-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #aaa;
+            font-size: 14px;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+    <div id="audio-control">اضغط على الزر لبدء العرض</div>
+    
+    <button id="start-btn">مافيش حاجه اسمها صدفة</button>
+    
+    <div id="dramatic-end">.. نهاية العمل الدرامي ، انتظروا باقي الاجزاء اذا اراد الله ان القصة تكتمل</div>
+    <div id="credits-container"></div>
+    
+    <audio id="background-music">
+        <!-- سيتم تغيير مصدر الصوت لاحقًا -->
+        <source src="awkat.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('start-btn');
+            const dramaticEnd = document.getElementById('dramatic-end');
+            const creditsContainer = document.getElementById('credits-container');
+            const backgroundMusic = document.getElementById('background-music');
+            const audioControl = document.getElementById('audio-control');
+            
+            // قائمة الكلمات
+            const words = [
+                "اسلام",
+                "اية",
+                "فيزياء",
+                "كيمياء",
+                "بيعرج",
+                "تك اوا",
+                "بحبك",
+                "متقلقيش",
+                "I won't leave you",
+                "مش هحلك",
+                "الوقت",
+                "حور",
+                "قطة",
+                "طب بس",
+                "سلام",
+                "و انتي من اهلي",
+                "واحشاني اوي",
+                "ليه ؟",
+                "لا مش بمزاجك",
+                "هقدري",
+                "غصب عنك هتكملي",
+                "مش هسيبك تقعي",
+                "اوعي تنهاري",
+                "انهارتي!💔",
+                "قلقان عليكي",
+                "مش هسيبك لدماغك",
+                "خطوبة",
+                "مرهق",
+                "الدنيا مش عادلة",
+                "نجمة ف السما",
+                "مافيش زيك",
+                "بعشقك",
+                "Your eyes are beautiful"
+            ];
+            
+            // مؤشر للكلمة الحالية في التكرار
+            let currentWordIndex = 0;
+            
+            // دالة لبدء عرض الكلمات
+            function startWordsDisplay() {
+                // إنشاء كلمة جديدة
+                const word = words[currentWordIndex];
+                currentWordIndex = (currentWordIndex + 1) % words.length;
+                
+                const credit = document.createElement('div');
+                credit.classList.add('credit');
+                
+                // إضافة رمز القلب إذا كانت الكلمة تحتوي على 💔
+                if (word.includes('💔')) {
+                    credit.innerHTML = word.replace('💔', '<span class="heart">💔</span>');
+                } else {
+                    credit.textContent = word;
+                }
+                
+                // تحديد حجم الكلمات بناء على محتواها
+                if (word.length > 10) {
+                    credit.style.fontSize = '1.6rem';
+                } else if (word.length > 5) {
+                    credit.style.fontSize = '1.7rem';
+                }
+                
+                // إضافة تأثير توهج عشوائي لبعض الكلمات
+                if (Math.random() > 0.7) {
+                    credit.classList.add('glow');
+                }
+                
+                creditsContainer.appendChild(credit);
+                
+                // إزالة الكلمة بعد انتهاء الصعود
+                setTimeout(() => {
+                    credit.remove();
+                }, 12000);
+            }
+            
+            startBtn.addEventListener('click', function() {
+                // إخفاء الزر
+                startBtn.style.display = 'none';
+                audioControl.style.display = 'none';
+                
+                // تشغيل الصوت (سيتم استبداله بملف awkat.html)
+                backgroundMusic.play().catch(e => console.log('لم يتم تشغيل الصوت:', e));
+                
+                // عرض الجملة الأولى
+                dramaticEnd.style.display = 'block';
+                
+                // بعد انتهاء الجملة الأولى، تبدأ الكلمات في الظهور
+                setTimeout(() => {
+                    dramaticEnd.style.display = 'none';
+                    creditsContainer.style.opacity = '1';
+                    
+                    // بدء عرض الكلمات
+                    startWordsDisplay();
+                    
+                    // تكرار عرض الكلمات كل 1.5 ثانية
+                    setInterval(startWordsDisplay, 1500);
+                }, 8000); // بعد 8 ثواني (مدة عرض الجملة الأولى)
+            });
+        });
+    </script>
+</body>
+</html>
