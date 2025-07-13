@@ -1,0 +1,1781 @@
+<!-- 🩶 الجزء الأول – بداية الحنين -->
+<section id="part-1" style="min-height: 100vh; padding: 60px 20px; position: relative; background: linear-gradient(135deg, #8A2BE2, #20B2AA); overflow: hidden; border-bottom: 3px dashed rgba(255,255,255,0.1); font-family: 'Cairo', sans-serif; color: white;">
+
+  <style>
+    #part-1 .intro {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: 900;
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      animation: introPulse 3s infinite;
+    }
+
+    @keyframes introPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    #part-1 .arrow {
+      position: absolute;
+      top: 50%;
+      right: -300px;
+      font-size: 3rem;
+      animation: flyInArrow 4s forwards;
+      cursor: pointer;
+      transform: rotate(180deg);
+      filter: drop-shadow(0 0 10px #ff0000);
+    }
+
+    @keyframes flyInArrow {
+      0% { right: -300px; }
+      100% { right: 50%; }
+    }
+
+    #foggyFace_Part1 {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #foggyFace_Part1 .foggy-text {
+      font-size: 2.2rem;
+      text-align: center;
+      padding: 30px;
+      animation: flickerText 2s infinite;
+    }
+
+    @keyframes flickerText {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+
+    #part-1 .random-emotion {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatEmotion 10s infinite linear;
+      opacity: 0.4;
+    }
+
+    @keyframes floatEmotion {
+      0% { transform: translateY(0); opacity: 0.2; }
+      50% { transform: translateY(-50px); opacity: 0.6; }
+      100% { transform: translateY(0); opacity: 0.2; }
+    }
+  </style>
+
+  <div class="intro">
+    "ده مش مجرد موقع... ده شعور كنت ناسيه!"
+  </div>
+
+  <div class="arrow" onclick="showFoggyFace_Part1()">➡️ اضغط للهروب من مشاعرك</div>
+
+  <div id="foggyFace_Part1">
+    <div class="foggy-text">
+      "أنت مش بتدور على معنى... أنت بتدور على شخص"
+      <br><br>
+      <span style="font-size: 1.2rem;">
+        "كنت تقول لي اشرب بقدونس لما أتعب،<br>ودلوقتي أنا بتعب أكتر لما بشربه من غيرك."
+      </span>
+    </div>
+  </div>
+
+  <!-- رموز تطير بشكل عبثي -->
+  <div class="random-emotion" style="top: 40%; left: 20%;">💔</div>
+  <div class="random-emotion" style="top: 70%; left: 80%;">💧</div>
+  <div class="random-emotion" style="top: 30%; left: 60%;">😭</div>
+  <div class="random-emotion" style="top: 55%; left: 10%;">🌪️</div>
+
+  <!-- صوت ناعم يظهر عند الظهور -->
+  <audio id="audio_part1" src="https://assets.mixkit.co/sfx/preview/mixkit-sad-violin-2021.mp3" preload="auto"></audio>
+
+  <script>
+    function showFoggyFace_Part1() {
+      document.querySelector('#part-1 .arrow').style.display = 'none';
+      document.getElementById('foggyFace_Part1').style.display = 'flex';
+      const audio = document.getElementById('audio_part1');
+      audio.volume = 0.3;
+      audio.play();
+    }
+  </script>
+</section>
+<!-- 💔 الجزء الثاني – اعتذار البابونج -->
+<section id="part-2" style="min-height: 100vh; padding: 60px 20px; position: relative; background: radial-gradient(circle, #3d0c5e, #000000); overflow: hidden; border-bottom: 3px dashed rgba(255,255,255,0.1); font-family: 'Cairo', sans-serif; color: white;">
+
+  <style>
+    #part-2 .apology-intro {
+      text-align: center;
+      font-size: 2.6rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      animation: lightPulse 4s infinite;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes lightPulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    #apologyBtn_2 {
+      display: block;
+      margin: 0 auto;
+      padding: 20px 50px;
+      font-size: 2rem;
+      background: linear-gradient(45deg, #ff4d4d, #ff9900);
+      border: none;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+      animation: apologyShake 1.5s infinite;
+    }
+
+    @keyframes apologyShake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .falling-flower {
+      position: fixed;
+      top: -50px;
+      font-size: 2.5rem;
+      opacity: 0.8;
+      animation: fallFlower linear forwards;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes fallFlower {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    }
+
+    #poetry_2 {
+      display: none;
+      text-align: center;
+      font-size: 1.8rem;
+      line-height: 2.2;
+      margin-top: 50px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #heartShadow {
+      font-size: 10rem;
+      text-align: center;
+      opacity: 0.05;
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      transform: rotate(-10deg);
+    }
+  </style>
+
+  <div class="apology-intro">
+    "أنا آسف يا بابونج... بس انت مش بترد"
+  </div>
+
+  <button id="apologyBtn_2" onclick="dropFlowersAndShowPoem()">اضغط لطلب السماح</button>
+
+  <div id="poetry_2">
+    
+    بس أنا كنت بقول ليكي آسف<br>
+    بصوت داخلي... ماعرفتش اوصله ليكي ، مكانش فيه اختيارات كتير ، مكنتش عايزك تعاني ،."
+  </div>
+
+  <div id="heartShadow">💔</div>
+
+  <audio id="sadMusic_2" src="https://assets.mixkit.co/sfx/preview/mixkit-sad-sorrowful-violin-1167.mp3" preload="auto"></audio>
+
+  <script>
+    function dropFlowersAndShowPoem() {
+      const btn = document.getElementById('apologyBtn_2');
+      btn.style.display = 'none';
+
+      // Play sad background music
+      const music = document.getElementById('sadMusic_2');
+      music.volume = 0.4;
+      music.play();
+
+      // Create 50 falling flowers
+      for (let i = 0; i < 50; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('falling-flower');
+        flower.innerHTML = '🥀';
+        flower.style.left = `${Math.random() * 100}%`;
+        flower.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
+        flower.style.animationDuration = `${Math.random() * 3 + 4}s`;
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+          flower.remove();
+        }, 7000);
+      }
+
+      // Show poetry
+      setTimeout(() => {
+        document.getElementById('poetry_2').style.display = 'block';
+      }, 2500);
+    }
+  </script>
+</section>
+
+<!-- 🪞 الجزء الثالث – شِعر لا يُقرأ -->
+<section id="part-3" style="min-height: 100vh; padding: 60px 20px; position: relative; background: #0f0f0f; color: #fff; font-family: 'Cairo', sans-serif; border-bottom: 3px dashed rgba(255,255,255,0.1); overflow: hidden;">
+
+  <style>
+    #part-3 .glitch-line {
+      font-size: 2rem;
+      text-align: center;
+      margin: 20px 0;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: showGlitch 2s ease forwards;
+    }
+
+    @keyframes showGlitch {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .glitch-text {
+      display: inline-block;
+      color: #fff;
+      text-shadow: 1px 0 red, -1px 0 cyan;
+      animation: glitchAnim 1s infinite;
+    }
+
+    @keyframes glitchAnim {
+      0% { transform: skew(0.5deg); }
+      20% { transform: skew(-1deg); }
+      40% { transform: skew(1.5deg); }
+      60% { transform: skew(-0.5deg); }
+      80% { transform: skew(0.3deg); }
+      100% { transform: skew(0); }
+    }
+
+    .fragmented-text {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #aaa;
+      letter-spacing: 0.5rem;
+      animation: fadeInOut 5s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .broken-letter {
+      display: inline-block;
+      animation: jumpy 3s infinite;
+    }
+
+    @keyframes jumpy {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .distorted-line {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 60px;
+      color: rgba(255, 255, 255, 0.6);
+      transform: rotate(-1deg);
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
+
+  <div class="glitch-line">
+    <span class="glitch-text">أُحـ…ـاوِل أن أكتب لكِ</span>
+  </div>
+
+  <div class="glitch-line">
+    <span class="glitch-text">لكِن الـ... كـ…ـلمات تـ...ـهرب</span>
+  </div>
+
+  <div class="fragmented-text">
+    م ـ ـ ش ـ ـ ا ـ ـ ع ـ ـ ر
+  </div>
+
+  <div class="glitch-line">
+    <span class="glitch-text">هــل كـنـتِ تـقـرين مـا لا يُـقـال؟</span>
+  </div>
+
+  <div class="glitch-line">
+    <span class="glitch-text">أنا الآن أكتُب في صـمـتٍ... يُـنـزف</span>
+  </div>
+
+  <div class="distorted-line">
+    "أنا آسف لو كنت قلبي اتكلم بلُغة إنتي مش بتقريها"
+  </div>
+
+  <div style="text-align:center; font-size: 5rem; margin-top: 50px; filter: blur(2px); opacity: 0.3;">🔤</div>
+
+  <audio id="glitchAudio_3" src="https://assets.mixkit.co/sfx/preview/mixkit-futuristic-glitch-transition-3165.mp3" preload="auto"></audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const glitchAudio = document.getElementById('glitchAudio_3');
+      glitchAudio.volume = 0.2;
+      glitchAudio.play();
+    });
+  </script>
+</section>
+<!-- 🏠 الجزء الرابع – بيت الذكرى -->
+<section id="part-4" style="min-height: 100vh; padding: 60px 20px; position: relative; background: linear-gradient(135deg, #2a2a2a, #000); overflow: hidden; font-family: 'Cairo', sans-serif; color: white; border-bottom: 3px dashed rgba(255,255,255,0.1);">
+
+  <style>
+    #part-4 .house-container {
+      position: relative;
+      width: 320px;
+      height: 260px;
+      margin: 100px auto 40px;
+      background: #8B4513;
+      border: 6px solid #4B2E06;
+      border-radius: 15px 15px 0 0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    #part-4 .roof {
+      position: absolute;
+      top: -70px;
+      left: -25px;
+      width: 370px;
+      height: 90px;
+      background: #A52A2A;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    }
+
+    #part-4 .door {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 150px;
+      background: #5D2906;
+      border: 3px solid #3D1800;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #part-4 .door:hover {
+      transform: translateX(-50%) scale(1.02);
+    }
+
+    #part-4 .door-knob {
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      width: 15px;
+      height: 15px;
+      background: #FFD700;
+      border-radius: 50%;
+    }
+
+    #part-4 .house-label {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-top: 40px;
+      animation: fadeInDown 3s ease;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* صندوق الهمسة */
+    #whisperBox_4 {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 2rem;
+      text-align: center;
+      padding: 30px;
+      z-index: 9999;
+      animation: pulseWhisper 5s infinite alternate;
+    }
+
+    @keyframes pulseWhisper {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    #whisperBox_4 button {
+      margin-top: 30px;
+      font-size: 1rem;
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="house-container">
+    <div class="roof"></div>
+    <div class="door" onclick="playWhisper_Part4()">
+      <div class="door-knob"></div>
+    </div>
+  </div>
+
+  <div class="house-label">
+    "مش كل بيت بيتفتح... بس كل ذكرى بتسكن فينا"
+  </div>
+
+  <!-- صندوق الهمسة -->
+  <div id="whisperBox_4">
+    <div>
+      "أوقات كنت بسمع صوتك... وأنا لوحدي"
+      <br><br>
+      "الباب اللي كنتي بتقفلي وراكي، لسه مفتوح جوا دماغي"
+    </div>
+    <button onclick="document.getElementById('whisperBox_4').style.display = 'none'">إغلاق</button>
+  </div>
+
+  <audio id="whisperAudio_4" src="https://assets.mixkit.co/sfx/preview/mixkit-woman-sad-sigh-433.mp3" preload="auto"></audio>
+
+  <script>
+    function playWhisper_Part4() {
+      const box = document.getElementById("whisperBox_4");
+      const audio = document.getElementById("whisperAudio_4");
+
+      // إغلاق أي عناصر نشطة
+      document.querySelectorAll(".whisper-active").forEach(el => {
+        el.style.display = "none";
+        el.classList.remove("whisper-active");
+      });
+
+      // تشغيل الهمسة
+      box.style.display = "flex";
+      box.classList.add("whisper-active");
+      audio.volume = 0.4;
+      audio.play();
+
+      // الإخفاء التلقائي بعد 8 ثواني
+      setTimeout(() => {
+        box.style.display = "none";
+        box.classList.remove("whisper-active");
+      }, 8000);
+    }
+  </script>
+</section>
+<!-- 📞 الجزء الخامس – اتصال غير ناجح -->
+<section id="part-5" style="min-height: 100vh; padding: 60px 20px; position: relative; background: #1a1a1a; font-family: 'Cairo', sans-serif; color: #fff; border-bottom: 3px dashed rgba(255,255,255,0.1); overflow: hidden;">
+
+  <style>
+    #part-5 .failed-intro {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      animation: blinkFailed 3s infinite;
+    }
+
+    @keyframes blinkFailed {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    #part-5 .options-failed {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .option-fake-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed #ccc;
+      padding: 20px 40px;
+      font-size: 1.3rem;
+      border-radius: 15px;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .option-fake-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .option-fake-btn::after {
+      content: "⚠️ فشل الاتصال";
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: #ff5555;
+      opacity: 0;
+      animation: showError 2s infinite;
+    }
+
+    @keyframes showError {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    #part-5 .error-screen {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      z-index: 9999;
+      text-align: center;
+      padding-top: 20%;
+      font-size: 2rem;
+    }
+
+    #part-5 .emoji-broken {
+      text-align: center;
+      font-size: 4rem;
+      opacity: 0.3;
+      margin-top: 60px;
+    }
+
+    #part-5 .console-log {
+      font-family: monospace;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+      color: #00ff00;
+      text-align: left;
+    }
+  </style>
+
+  <div class="failed-intro">
+    "جارٍ الاتصال بالبقدونس... انتظر من فضلك"
+  </div>
+
+  <div class="options-failed">
+    <div class="option-fake-btn" onclick="triggerError()">اتصل بالبقدونس</div>
+    <div class="option-fake-btn" onclick="triggerError()">استرجاع الذكرى</div>
+    <div class="option-fake-btn" onclick="triggerError()">إرسال رسالة مفقودة</div>
+    <div class="option-fake-btn" onclick="triggerError()">إعادة تشغيل المشاعر</div>
+  </div>
+
+  <div class="emoji-broken">📵💔🥬</div>
+
+  <div class="console-log">
+    <div>> Trying to connect... </div>
+    <div>> Response not found. </div>
+    <div>> TimeoutError: memory overload at line 2009</div>
+    <div>> Fallback to isolation mode.</div>
+    <div>> Disconnecting...</div>
+  </div>
+
+  <!-- شاشة الخطأ -->
+  <div id="errorScreen_5" class="error-screen">
+    فشل الاتصال بالبقدونس.
+    <br><br>
+    يرجى مراجعة مشاعرك لاحقًا.
+  </div>
+
+  <audio id="failSound_5" src="https://assets.mixkit.co/sfx/preview/mixkit-tech-break-fail-2947.mp3" preload="auto"></audio>
+
+  <script>
+    function triggerError() {
+      const errorScreen = document.getElementById('errorScreen_5');
+      const failSound = document.getElementById('failSound_5');
+
+      errorScreen.style.display = 'block';
+      failSound.volume = 0.4;
+      failSound.play();
+
+      setTimeout(() => {
+        errorScreen.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+</section>
+<!-- 🌊 الجزء السادس – لحظة سكوت مائي -->
+<section id="part-6" style="min-height: 100vh; padding: 60px 20px; position: relative; background: radial-gradient(circle, #001f3f, #000); font-family: 'Cairo', sans-serif; color: #d0f0ff; border-bottom: 3px dashed rgba(255,255,255,0.1); overflow: hidden;">
+
+  <style>
+    #part-6 .water-drop {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8rem;
+      animation: dropDown 5s ease-in-out infinite;
+      opacity: 0.2;
+    }
+
+    @keyframes dropDown {
+      0% { transform: translate(-50%, -50px); opacity: 0.1; }
+      50% { transform: translate(-50%, 0); opacity: 0.4; }
+      100% { transform: translate(-50%, -50px); opacity: 0.1; }
+    }
+
+    #part-6 .quiet-text {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-top: 80px;
+      color: #d0f0ff;
+      animation: slowFade 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowFade {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    #part-6 .waves {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: url('https://i.imgur.com/LaN6jxD.png') repeat-x;
+      background-size: cover;
+      animation: waveMotion 20s linear infinite;
+      opacity: 0.05;
+    }
+
+    @keyframes waveMotion {
+      0% { background-position-x: 0; }
+      100% { background-position-x: 1000px; }
+    }
+  </style>
+
+  <div class="water-drop">💧</div>
+
+  <div class="quiet-text">
+    "في لحظة ما...  
+    <br> مفيش حاجة حصلت  
+    <br> بس أنا غرقت."
+  </div>
+
+  <div class="waves"></div>
+
+  <audio id="waterSound_6" src="https://assets.mixkit.co/sfx/preview/mixkit-drift-away-slow-water-1122.mp3" preload="auto"></audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('waterSound_6');
+      audio.volume = 0.3;
+      audio.loop = true;
+      audio.play().catch(() => {});
+    });
+  </script>
+</section>
+<!-- 🕯️ الجزء السابع – رسائل من الماضي (نسخة نهائية معدّلة) -->
+<section id="part-7" style="min-height: 100vh; padding: 60px 20px; position: relative; background: #000000; font-family: 'Cairo', sans-serif; color: #fff; overflow: hidden; border-bottom: 3px dashed rgba(255,255,255,0.1);">
+
+  <style>
+    .ghost-message {
+      position: absolute;
+      font-size: 1.8rem;
+      opacity: 0;
+      animation: floatGhost 7s ease-in-out forwards;
+      color: #f0f0f0;
+      pointer-events: none;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(255,255,255,0.15);
+      z-index: 10;
+    }
+
+    @keyframes floatGhost {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95) rotate(0deg);
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -60%) scale(1.02) rotate(2deg);
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95) rotate(-2deg);
+      }
+    }
+  </style>
+
+  <div id="ghostContainer_7"></div>
+
+  <audio id="whisperAudio_7" src="https://assets.mixkit.co/sfx/preview/mixkit-creepy-whispers-voiced-466.mp3" preload="auto"></audio>
+
+  <script>
+    const messages_7 = [
+      "مش هسيبك لوحدك أبدا",
+      "هعمل كل حاجة عشان تكوني كويسة",
+      "آية أنا بحبك",
+      "لقد وقعنا في الفخ",
+      "وعد هتكوني كويسة",
+      "مش هحلك",
+      "تعبان شوية",
+      "مرهق",
+      "القمر غيران منك",
+      "وردايتي",
+      "بعشقك"
+    ];
+
+    function createGhostMessage() {
+      const msg = document.createElement('div');
+      msg.className = 'ghost-message';
+      msg.textContent = messages_7[Math.floor(Math.random() * messages_7.length)];
+
+      // توزيع عشوائي وسط الشاشة (safe zone)
+      const top = Math.random() * 40 + 30;   // من 30% إلى 70%
+      const left = Math.random() * 40 + 30;  // من 30% إلى 70%
+      const rotate = Math.random() * 6 - 3;  // من -3 إلى +3 درجة
+
+      msg.style.top = `${top}%`;
+      msg.style.left = `${left}%`;
+      msg.style.transform = `translate(-50%, -50%) rotate(${rotate}deg)`;
+
+      document.getElementById('ghostContainer_7').appendChild(msg);
+
+      // حذف الرسالة بعد ٧ ثواني
+      setTimeout(() => {
+        msg.remove();
+      }, 7000);
+    }
+
+    // إنشاء رسالة جديدة كل ٢ ثانية
+    setInterval(() => {
+      createGhostMessage();
+    }, 2000);
+
+    // تشغيل همسة خفيفة وقت التحميل
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('whisperAudio_7');
+      audio.volume = 0.2;
+      audio.play().catch(() => {});
+    });
+  </script>
+</section>
+<!-- 🪞 الجزء الثامن – انعكاس -->
+<section id="part-8" style="min-height: 100vh; padding: 60px 20px; position: relative; background: #111; color: #fff; font-family: 'Cairo', sans-serif; border-bottom: 3px dashed rgba(255,255,255,0.1); direction: rtl; overflow: hidden; transform: scaleX(-1);">
+
+  <style>
+    #part-8 .mirror-text {
+      text-align: center;
+      font-size: 2.2rem;
+      line-height: 2.8rem;
+      white-space: pre-line;
+      animation: mirrorGlow 5s ease-in-out infinite;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transform: scaleX(-1); /* نرجع الكلام صح جوه سكشن مقلوب */
+    }
+
+    @keyframes mirrorGlow {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+      100% { opacity: 0.5; }
+    }
+
+    #part-8 .flipped-word {
+      display: inline-block;
+      transform: rotateY(180deg);
+      color: #aaa;
+      margin: 0 5px;
+    }
+
+    #part-8 .glitch-line {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 1.4rem;
+      color: #ccc;
+      animation: glitchMove 3s infinite;
+      transform: scaleX(-1);
+    }
+
+    @keyframes glitchMove {
+      0%, 100% { letter-spacing: 0; }
+      50% { letter-spacing: 5px; }
+    }
+  </style>
+
+  <div class="mirror-text">
+    .كـنـت بـبـص عـليـكـي<br>
+    .ومـش عـارف أنـتـي فـيـن<br>
+    .يـمـكـن فـي دمـاغـي…<br>
+    .يـمـكـن فـي ذاكـرتـي<br>
+    <br>
+    <span class="flipped-word">أ</span>
+    <span class="flipped-word">ن</span>
+    <span class="flipped-word">ا</span>
+    <span class="flipped-word"> </span>
+    <span class="flipped-word">م</span>
+    <span class="flipped-word">ش</span>
+    <span class="flipped-word"> </span>
+    <span class="flipped-word">ه</span>
+    <span class="flipped-word">ن</span>
+    <span class="flipped-word">س</span>
+    <span class="flipped-word">ى</span>
+  </div>
+
+  <div class="glitch-line">!ʞɔɐq ʇɐǝɹƃ ʇ,uɐ noʎ ʎɐs ʇ,uop</div>
+
+  <audio id="mirrorAudio_8" src="https://assets.mixkit.co/sfx/preview/mixkit-distorted-short-transition-3208.mp3" preload="auto"></audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('mirrorAudio_8');
+      audio.volume = 0.25;
+      audio.play().catch(() => {});
+    });
+  </script>
+</section>
+<!-- 🕰️ الجزء التاسع – وقت غير مناسب (ساعة 11:11) -->
+<section id="part-9" style="min-height: 100vh; padding: 60px 20px; position: relative; background: #0a0a0a; color: #f8f8f8; font-family: 'Cairo', sans-serif; border-bottom: 3px dashed rgba(255,255,255,0.1); overflow: hidden;">
+
+  <style>
+    #part-9 .clock-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 100px;
+    }
+
+    #part-9 .clock {
+      font-size: 6rem;
+      font-weight: bold;
+      letter-spacing: 10px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      animation: pulseClock 5s ease-in-out infinite;
+    }
+
+    @keyframes pulseClock {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    #part-9 .whisper-line {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      opacity: 0.1;
+      animation: appearDisappear 10s ease-in-out infinite;
+      text-align: center;
+      line-height: 2.5rem;
+      white-space: pre-line;
+    }
+
+    @keyframes appearDisappear {
+      0%, 100% { opacity: 0.1; transform: translateY(10px); }
+      50% { opacity: 1; transform: translateY(0); }
+    }
+
+    #part-9 .moving-shadow {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-size: 6rem;
+      color: rgba(255,255,255,0.02);
+      transform: rotate(-30deg);
+    }
+
+    #part-9 .still-box {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 200px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+  </style>
+
+  <div class="clock-container">
+    <div class="clock">11:11</div>
+    <div class="whisper-line">
+      "أوقات بيكون الوقت مناسب للكلام…  
+      <br>بس مافيش كلام مناسب للوقت."
+    </div>
+  </div>
+
+  <div class="still-box"></div>
+
+  <div class="moving-shadow">🕰️</div>
+
+  <audio id="clockAudio_9" src="https://assets.mixkit.co/sfx/preview/mixkit-clock-tick-1183.mp3" preload="auto"></audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const clockAudio = document.getElementById('clockAudio_9');
+      clockAudio.volume = 0.2;
+      clockAudio.loop = true;
+      clockAudio.play().catch(() => {});
+    });
+  </script>
+</section>
+
+<!-- 🌫️ الجزء العاشر – حرب ضبابية عبثية -->
+<section id="part-10" style="min-height: 100vh; padding: 60px 20px; position: relative; background: linear-gradient(135deg, #0f0f0f, #1a1a1a); font-family: 'Cairo', sans-serif; color: white; overflow: hidden; border-bottom: 3px dashed rgba(255,255,255,0.1);">
+
+  <style>
+    #part-10 .fog-layer {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://i.imgur.com/8Yj6sVC.png'); /* ضباب ناعم */
+      background-size: cover;
+      opacity: 0.08;
+      animation: fogMove 60s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fogMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .phantom-word {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      animation: revealGhostWord 8s ease-in-out forwards;
+      text-shadow: 0 0 10px rgba(255,255,255,0.1);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    @keyframes revealGhostWord {
+      0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+      40% { opacity: 1; transform: scale(1.05) translateY(0); }
+      70% { opacity: 1; }
+      100% { opacity: 0; transform: scale(0.9) translateY(-20px); }
+    }
+
+    #part-10 .fog-question {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      opacity: 0.1;
+      animation: pulseFlash 7s infinite ease-in-out;
+      z-index: 3;
+      white-space: pre-line;
+    }
+
+    @keyframes pulseFlash {
+      0%, 100% { opacity: 0.05; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+
+  <div class="fog-layer"></div>
+
+  <div class="fog-question">
+    حور؟  
+    قطة؟  
+    حمامة؟  
+    <br>إسلام زيهم؟  
+    <br>ولا مختلف؟
+  </div>
+
+  <div id="ghostWords_10"></div>
+
+  <audio id="warFogAudio_10" src="https://assets.mixkit.co/sfx/preview/mixkit-creepy-ambience-1150.mp3" preload="auto"></audio>
+
+  <script>
+    const words_10 = [
+      "صوت... ما بينكسرش",
+      "عيون؟ ولا دخان؟",
+      "حد شاف حور؟",
+      "فيه قطة عدت من هنا؟",
+      "الحمامة دي بتراقبنا؟",
+      "هو إسلام زيهم؟",
+      "ولا كان مختلف فعلاً؟",
+      "الغيم بيغطي الحقيقة؟",
+      "أنا شوفتك جوه الضباب",
+      "ولا أنت كنت فكرة؟"
+    ];
+
+    function spawnGhostWord_10() {
+      const word = document.createElement('div');
+      word.className = 'phantom-word';
+      word.textContent = words_10[Math.floor(Math.random() * words_10.length)];
+
+      word.style.top = `${Math.random() * 70 + 10}%`;
+      word.style.left = `${Math.random() * 80 + 10}%`;
+      word.style.animationDuration = `${Math.random() * 4 + 5}s`;
+      word.style.fontSize = `${Math.random() * 1.5 + 1.2}rem`;
+
+      document.getElementById('ghostWords_10').appendChild(word);
+
+      setTimeout(() => {
+        word.remove();
+      }, 8000);
+    }
+
+    setInterval(() => {
+      spawnGhostWord_10();
+    }, 2500);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const fogAudio = document.getElementById('warFogAudio_10');
+      fogAudio.volume = 0.15;
+      fogAudio.loop = true;
+      fogAudio.play().catch(() => {});
+    });
+  </script>
+</section>
+<!-- 💔 الجزء 12: انفجار الكلمات العاطفية في خلفية ملونة -->
+<section id="part-12" style="min-height: 200vh; padding: 60px 20px; position: relative; overflow: hidden; background: linear-gradient(270deg, #e75480, #00ced1, #8a2be2, #ffa500, #2e8b57); background-size: 1000% 1000%; animation: bgShift 60s ease infinite;">
+
+  <style>
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .emotion-word {
+      position: absolute;
+      white-space: nowrap;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+      mix-blend-mode: screen;
+      animation: floatEmotion 18s infinite ease-in-out;
+    }
+
+    @keyframes floatEmotion {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        transform: translate(80px, -60px) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <div id="emotion-container-12"></div>
+
+  <script>
+    const container = document.getElementById('emotion-container-12');
+
+    const emotions = [
+      // الحب
+      "love", "affection", "devotion", "adore", "cherish", "tenderness", "attraction", "soulmate", "heartbeat", "forever",
+      // الحزن
+      "sorrow", "grief", "misery", "emptiness", "regret", "tears", "void", "crying", "melancholy", "pain",
+      // الاشتياق
+      "longing", "yearning", "nostalgia", "I miss you", "ache", "burning", "come back", "still here", "haunted", "echo",
+      // رموز إضافية
+      "?", "...", "remember?", "too late", "broken", "fade", "lost", "cold", "dream", "silence"
+    ];
+
+    function spawnEmotion() {
+      const word = document.createElement('div');
+      word.className = 'emotion-word';
+      word.textContent = emotions[Math.floor(Math.random() * emotions.length)];
+
+      word.style.top = `${Math.random() * 190}vh`;
+      word.style.left = `${Math.random() * 95}%`;
+      word.style.fontSize = `${Math.random() * 2 + 1}rem`;
+      word.style.color = `hsl(${Math.random() * 360}, 100%, 75%)`;
+      word.style.animationDuration = `${Math.random() * 12 + 10}s`;
+
+      container.appendChild(word);
+
+      setTimeout(() => word.remove(), 20000);
+    }
+
+    setInterval(spawnEmotion, 200);
+  </script>
+</section>
+
+<!-- 💔 الجزء 13: القلب المسجون في قفص المال -->
+<section id="part-13" style="min-height: 120vh; padding: 60px 20px; background: radial-gradient(circle, #0a0a0a, #000); position: relative; overflow: hidden; color: #fff; font-family: 'Cairo', sans-serif;">
+
+  <style>
+    #part-13 .art-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 50px;
+      position: relative;
+    }
+
+    #part-13 .cage {
+      width: 220px;
+      height: 260px;
+      border: 2px solid #888;
+      position: relative;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.1);
+    }
+
+    #part-13 .bar {
+      width: 6px;
+      height: 100%;
+      background: repeating-linear-gradient(180deg, #c0c0c0, #c0c0c0 10px, #ffd700 10px, #ffd700 20px);
+      position: absolute;
+      top: 0;
+    }
+
+    #part-13 .bar:nth-child(1) { left: 20px; }
+    #part-13 .bar:nth-child(2) { left: 50px; }
+    #part-13 .bar:nth-child(3) { left: 80px; }
+    #part-13 .bar:nth-child(4) { left: 110px; }
+    #part-13 .bar:nth-child(5) { left: 140px; }
+    #part-13 .bar:nth-child(6) { left: 170px; }
+
+    #part-13 .heart {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      color: red;
+      text-shadow: 0 0 15px rgba(255,0,0,0.5);
+      animation: pulseHeart 2s infinite;
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    #part-13 .tear {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 20px;
+      background: #00f;
+      border-radius: 50%;
+      animation: dropTear 2.5s infinite ease-in;
+    }
+
+    @keyframes dropTear {
+      0% { top: 55%; opacity: 1; }
+      50% { top: 65%; opacity: 0.5; }
+      100% { top: 75%; opacity: 0; }
+    }
+
+    #part-13 .caption {
+      margin-top: 40px;
+      font-size: 1.8rem;
+      text-align: center;
+      color: #fdd;
+      line-height: 2.5rem;
+      max-width: 700px;
+    }
+
+    #part-13 .money-rain {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      animation: fallMoney 10s linear infinite;
+      color: #00ff88;
+      opacity: 0.2;
+    }
+
+    @keyframes fallMoney {
+      0% { top: -50px; transform: rotate(0deg); }
+      100% { top: 120%; transform: rotate(360deg); }
+    }
+  </style>
+
+  <div class="art-container">
+    <div class="cage">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="heart">💔</div>
+      <div class="tear"></div>
+    </div>
+
+    <div class="caption">
+    <br>
+      "مش كل قفص بيتعمل من حديد… في قفص بيتبني من ورق نقدي."
+    </div>
+  </div>
+
+  <!-- أمطار نقود -->
+  <script>
+    const part13 = document.getElementById('part-13');
+    const moneySymbols = ['💸', '💵', '💰'];
+
+    function dropMoney() {
+      const drop = document.createElement('div');
+      drop.className = 'money-rain';
+      drop.textContent = moneySymbols[Math.floor(Math.random() * moneySymbols.length)];
+      drop.style.left = `${Math.random() * 100}%`;
+      drop.style.animationDuration = `${Math.random() * 10 + 5}s`;
+      part13.appendChild(drop);
+      setTimeout(() => drop.remove(), 12000);
+    }
+
+    setInterval(dropMoney, 500);
+  </script>
+</section>
+
+
+<!-- 🌙 الجزء 14: أميرة القمر والعاشق الولهان -->
+<section id="part-14" style="min-height: 130vh; position: relative; background: radial-gradient(ellipse at top, #1e1e3f 0%, #0c0c1f 100%); overflow: hidden; font-family: 'Cairo', sans-serif;">
+
+  <style>
+    #part-14 .sky {
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/zH3W2k6/night-stars.jpg') center/cover no-repeat;
+      opacity: 0.08;
+      position: absolute;
+      z-index: 0;
+    }
+
+    #part-14 .moon {
+      position: absolute;
+      top: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #fff7d6, #f0e7c0, #c9c4b7);
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(255,255,180,0.6);
+      z-index: 2;
+    }
+
+    #part-14 .princess {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -80%);
+      font-size: 3rem;
+      animation: floatPrincess 3s ease-in-out infinite;
+    }
+
+    @keyframes floatPrincess {
+      0%, 100% { transform: translate(-50%, -80%); }
+      50% { transform: translate(-50%, -90%); }
+    }
+
+    #part-14 .ladder {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 65%;
+      background: repeating-linear-gradient(to top, #deb887, #deb887 15px, transparent 15px, transparent 30px);
+      z-index: 1;
+    }
+
+    #part-14 .lover {
+      position: absolute;
+      bottom: 0;
+      left: 48%;
+      font-size: 2.5rem;
+      z-index: 3;
+      animation: breathe 4s infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    #part-14 .cloud {
+      position: absolute;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+      filter: blur(20px);
+      animation: moveCloud 60s linear infinite;
+    }
+
+    .cloud1 { width: 400px; height: 150px; top: 20%; left: -30%; animation-delay: 0s; }
+    .cloud2 { width: 300px; height: 120px; top: 35%; left: -20%; animation-delay: 10s; }
+    .cloud3 { width: 500px; height: 180px; top: 50%; left: -40%; animation-delay: 20s; }
+
+    @keyframes moveCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(150vw); }
+    }
+
+    #part-14 .caption {
+      position: absolute;
+      bottom: 8%;
+      width: 100%;
+      text-align: center;
+      color: #eee;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-style: italic;
+      z-index: 5;
+    }
+
+    #part-14 .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.1;
+      z-index: 0;
+      animation: twinkle 80s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0% { background-position: 0 0; }
+      100% { background-position: 300px 300px; }
+    }
+  </style>
+
+  <!-- خلفية النجوم -->
+  <div class="sky"></div>
+  <div class="stars"></div>
+
+  <!-- سُحُب عابرة -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <!-- القمر -->
+  <div class="moon">
+    <div class="princess">👸‍♀️</div>
+  </div>
+
+  <!-- السُلّم -->
+  <div class="ladder"></div>
+
+  <!-- العاشق -->
+  <div class="lover">🧑‍🦱💭</div>
+
+  <!-- النص -->
+  <div class="caption">
+    "هناك فوقَ ضوءٍ لا يُطال،<br>
+    جلستْ أميرةُ القمر،<br>
+    وأنا… رجلٌ بسيطٌ، أسلّمُ روحي لسُلَّمٍ لا اعلم ما اذا سوف يصل."
+  </div>
+
+</section>
+
+<section id="part-15" style="min-height: 150vh; background: #1b1b2f; color: #fff; position: relative; overflow: hidden; font-family: 'Cairo', sans-serif; padding: 60px 20px;">  <style>
+    #part-15 .verse {
+      position: absolute;
+      font-size: 1.6rem;
+      font-weight: 400;
+      max-width: 400px;
+      opacity: 0;
+      animation: verseAppear 12s linear infinite;
+      text-align: center;
+      line-height: 2.2rem;
+    }
+
+    @keyframes verseAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.05);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(0.8);
+      }
+    }
+
+    #part-15 .glitch {
+      position: absolute;
+      font-size: 2.5rem;
+      color: #ff0066;
+      animation: glitchMove 8s infinite alternate ease-in-out;
+      font-weight: bold;
+    }
+
+    @keyframes glitchMove {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-15px, 5px) rotate(5deg); }
+      50% { transform: translate(10px, -10px) rotate(-3deg); }
+      75% { transform: translate(-5px, 3px) rotate(4deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    #part-15 .background-fade {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #301934, #0e0e1e);
+      opacity: 0.08;
+      z-index: 0;
+      animation: pulseBG 20s infinite ease-in-out;
+    }
+
+    @keyframes pulseBG {
+      0%, 100% { opacity: 0.08; }
+      50% { opacity: 0.15; }
+    }
+  </style>  <div class="background-fade"></div>  <!-- أبيات شعر عبثية -->  <div class="verse" style="top: 20%; left: 10%; animation-delay: 0s;">"كنت أفتش عنكِ في مرآتي... فوجدت المراة مكسورة."</div>
+  <div class="verse" style="top: 30%; left: 55%; animation-delay: 2s;">"احببتك كأني لم احب احدا قط ، ."</div>
+  <div class="verse" style="top: 40%; left: 15%; animation-delay: 4s;">"في الوحدةِ ضجيج لا يسمعه أحد… إلا من فقد."</div>
+  <div class="verse" style="top: 50%; left: 60%; animation-delay: 6s;">"ضحكتك كانت ضوء... بس راحت، والظلمة بقت عنوان."</div>
+  <div class="verse" style="top: 60%; left: 10%; animation-delay: 8s;">"أنا مش حزين... أنا فاكر."</div>
+  <div class="verse" style="top: 70%; left: 50%; animation-delay: 10s;">"وعد؟ وعد مين؟ أنا مش بنسي."</div>
+  <div class="verse" style="top: 80%; left: 5%; animation-delay: 12s;">"بكيتك في حلم، صحيت… لقيتك رايحة فعلاً."</div>  <!-- Glitch كلمات -->  <div class="glitch" style="top: 15%; left: 50%;">LOVE?</div>
+  <div class="glitch" style="top: 35%; left: 20%;">ALONE.</div>
+  <div class="glitch" style="top: 60%; left: 70%;">BROKEN.</div>
+  <div class="glitch" style="top: 75%; left: 30%;">YOU?</div>
+  <div class="glitch" style="top: 25%; left: 80%;">GONE.</div>
+  <div class="glitch" style="top: 85%; left: 15%;">WHY?</div></section>
+  
+  <section id="part-16" style="position: relative; min-height: 250vh; background: #000013; overflow: hidden;">  <style>
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate(50px, -30px) rotate(180deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    @keyframes flickerText {
+      0%, 100% {
+        opacity: 0.1;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .floating-word {
+      position: absolute;
+      font-size: calc(1.5rem + 1vw);
+      font-weight: bold;
+      color: hsl(calc(360 * var(--i)), 80%, 70%);
+      animation: drift calc(10s + var(--i) * 1s) infinite ease-in-out;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .flicker-text {
+      position: absolute;
+      font-size: 1.7rem;
+      color: white;
+      animation: flickerText 6s infinite ease-in-out;
+      pointer-events: none;
+    }
+  </style>  <script>
+    const loveWords = [
+      "affection", "desire", "devotion", "passion", "longing", "romance",
+      "sorrow", "grief", "melancholy", "pain", "regret", "loneliness",
+      "crave", "ache", "yearn", "miss", "hopeless", "fade", "empty"
+    ];
+
+    for (let i = 0; i < 100; i++) {
+      const word = document.createElement('div');
+      word.className = 'floating-word';
+      word.textContent = loveWords[Math.floor(Math.random() * loveWords.length)];
+      word.style.top = `${Math.random() * 200}%`;
+      word.style.left = `${Math.random() * 100}%`;
+      word.style.setProperty('--i', Math.random());
+      document.getElementById('part-16').appendChild(word);
+    }
+
+    const whispers = [
+      "You left, but the silence stayed...",
+      "Every beat hurts.",
+      "She never really left, did she?",
+      "I dream in your absence.",
+      "Love without touch is torment.",
+      "At 11:11, I still wish for you."
+    ];
+
+    function showWhispers() {
+      const whisper = document.createElement('div');
+      whisper.className = 'flicker-text';
+      whisper.textContent =
+        whispers[Math.floor(Math.random() * whispers.length)];
+      whisper.style.top = `${Math.random() * 180 + 10}%`;
+      whisper.style.left = `${Math.random() * 90 + 5}%`;
+      document.getElementById('part-16').appendChild(whisper);
+
+      setTimeout(() => whisper.remove(), 6000);
+    }
+
+    setInterval(showWhispers, 3000);
+  </script>  <audio autoplay loop>
+    <source
+      src="https://assets.mixkit.co/sfx/preview/mixkit-slow-breathing-118.mp3"
+      type="audio/mpeg"
+    />
+  </audio></section>
+  
+  <section id="part-17" style="min-height: 100vh; background: #000; position: relative; overflow: hidden; color: white; font-family: sans-serif;">
+
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.1; }
+      50% { transform: translateY(-30px); opacity: 1; }
+      100% { transform: translateY(0); opacity: 0.1; }
+    }
+
+    .floating-word {
+      position: absolute;
+      font-size: 1rem;
+      font-weight: bold;
+      color: hsl(var(--hue), 80%, 70%);
+      animation: float 6s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    .main-text {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+
+  <div class="main-text">
+    الدنيا مش.عادلة...
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const words = [
+        "love", "grief", "ache", "pain", "desire", "loss",
+        "regret", "hollow", "yearn", "touch", "gone", "fade"
+      ];
+
+      const container = document.getElementById("part-17");
+
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement("div");
+        el.className = "floating-word";
+        el.textContent = words[Math.floor(Math.random() * words.length)];
+        el.style.top = `${Math.random() * 80 + 10}vh`;
+        el.style.left = `${Math.random() * 90}%`;
+        el.style.setProperty('--hue', Math.floor(Math.random() * 360));
+        container.appendChild(el);
+      }
+    });
+  </script>
+
+</section>
+<section id="part-18" style="background: linear-gradient(to bottom, #0d0d0d, #1e1e2f); min-height: 100vh; padding: 60px 20px; font-family: 'Cairo', sans-serif; color: white; display: flex; flex-direction: column; align-items: center;">
+
+  <style>
+    .fade-line {
+      opacity: 0;
+      transform: translateY(30px);
+      font-size: 1.2rem;
+      font-weight: 600;
+      max-width: 600px;
+      text-align: center;
+      margin: 20px 0;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+
+    .fade-line:nth-child(1) { animation-delay: 0s; }
+    .fade-line:nth-child(2) { animation-delay: 2s; }
+    .fade-line:nth-child(3) { animation-delay: 4s; }
+    .fade-line:nth-child(4) { animation-delay: 6s; }
+    .fade-line:nth-child(5) { animation-delay: 8s; }
+    .fade-line:nth-child(6) { animation-delay: 10s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <div class="fade-line">أيوه تعبان، بس كملت كتير... كمل شوية كمان.</div>
+  <div class="fade-line">كل اللي محتاجه: نفس، نية، و"هكمل مهما حصل".</div>
+  <div class="fade-line">فاكر نفسك تايه؟ يمكن الطريق هو اللي بيتشكل على خطاك.</div>
+  <div class="fade-line">كفاية إنك لسه بتحاول... وده أكبر إنجاز.</div>
+  <div class="fade-line">فيه نور جاي... لو عينك تعبانه، قلبك لسه شايفه.</div>
+  <div class="fade-line">مفيش حاجة اسمها متأخر... فيه حاجة اسمها دلوقتي.</div>
+
+</section>
+
+
+<section id="part-19" style="min-height: 100vh; background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%); display: flex; align-items: center; justify-content: center; position: relative; font-family: 'Cairo', sans-serif; overflow: hidden;">
+
+  <style>
+    .heart-fear {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #ffdddd;
+      max-width: 700px;
+      text-align: center;
+      opacity: 0;
+      animation: revealSlow 6s ease forwards 2s;
+      text-shadow: 0 0 10px #ff0000;
+      padding: 0 20px;
+    }
+
+    .floating-memories {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-word {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.08);
+      font-size: 2rem;
+      font-weight: bold;
+      animation: floatMemories 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes floatMemories {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-150vh) rotate(360deg);
+      }
+    }
+
+    @keyframes revealSlow {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <div class="heart-fear">
+    "خايف أعمل ذكريات ما تنسيهاش
+    و تختاري ماتبقيش ليا و تفتكريها كتير ،
+  </div>
+
+  <!-- ذكريات عائمة كأنها بتغرق ف الهوا -->
+  <div class="floating-memories">
+    <div class="floating-word" style="top: 10%; left: 20%;">ضحكتها</div>
+    <div class="floating-word" style="top: 25%; left: 60%;">نظرتها</div>
+    <div class="floating-word" style="top: 40%; left: 35%;">المرة الأولى</div>
+    <div class="floating-word" style="top: 60%; left: 10%;">الخوف</div>
+    <div class="floating-word" style="top: 75%; left: 70%;">كنت هنا</div>
+    <div class="floating-word" style="top: 90%; left: 45%;">لحظة الوداع</div>
+  </div>
+
+</section>
+.
+<section id="part-20" style="height: 100vh; background-color: black; display: flex; justify-content: center; align-items: center;">
+  <style>
+    .final-button {
+      font-size: 2rem;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #ff4d4d, #8b0000);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    .final-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+
+  <button class="final-button" onclick="location.href='end.html'">تفتكري فيه تاني؟</button>
+</section>
