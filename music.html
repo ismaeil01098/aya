@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلي وقتك يا وردايتي - الأغاني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6, #ffd6e7);
+            color: #6d2c50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23ffb6c180" stroke-width="1" stroke-dasharray="5,5"/><circle cx="20" cy="20" r="3" fill="%23ffb6c1"/><circle cx="70" cy="40" r="4" fill="%23ffb6c1"/><circle cx="50" cy="80" r="2" fill="%23ffb6c1"/><circle cx="85" cy="15" r="3" fill="%23ffb6c1"/><circle cx="10" cy="60" r="2" fill="%23ffb6c1"/><circle cx="40" cy="30" r="3" fill="%23ffb6c1"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 20px 0 30px;
+            position: relative;
+        }
+        
+        .name-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1 {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.5rem;
+            color: #9d4b6b;
+            text-shadow: 0 2px 8px rgba(157, 75, 107, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.2rem;
+            color: #9d4b6b;
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: "";
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, #ffb6c1, #d57a99);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .intro-text {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(157, 75, 107, 0.1);
+            border: 1px solid #f8d7e9;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        .music-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0 40px;
+        }
+        
+        .song-card {
+            background: linear-gradient(145deg, #ffffff, #fff9fb);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(157, 75, 107, 0.15);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #f8d7e9;
+            transition: all 0.3s ease;
+            min-height: 220px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(157, 75, 107, 0.25);
+        }
+        
+        .song-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ffb6c1, #d57a99);
+        }
+        
+        .song-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #d57a99;
+            transition: transform 0.3s ease;
+        }
+        
+        .song-card:hover .song-icon {
+            transform: scale(1.2);
+        }
+        
+        .song-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #9d4b6b;
+            font-weight: bold;
+        }
+        
+        .song-artist {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #6d2c50;
+            font-style: italic;
+        }
+        
+        .song-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #6d2c50;
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+        
+        .play-btn {
+            background: linear-gradient(145deg, #ffb6c1, #d57a99);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(213, 122, 153, 0.3);
+        }
+        
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(213, 122, 153, 0.4);
+            background: linear-gradient(145deg, #d57a99, #ffb6c1);
+        }
+        
+        .floating-note {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 8rem;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .note1 {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .note2 {
+            bottom: 20%;
+            right: 5%;
+            animation-delay: -5s;
+        }
+        
+        .note3 {
+            top: 30%;
+            right: 15%;
+            animation-delay: -3s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #ffffff, #fff0f5);
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: #9d4b6b;
+            box-shadow: 0 4px 10px rgba(157, 75, 107, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(157, 75, 107, 0.2);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(157, 75, 107, 0.1);
+            border: 1px solid #f8d7e9;
+        }
+        
+        .footer-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #9d4b6b;
+            line-height: 1.5;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(145deg, #ffffff, #fff0f5);
+            border: none;
+            border-radius: 15px;
+            padding: 8px 15px;
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            color: #9d4b6b;
+            box-shadow: 0 4px 10px rgba(157, 75, 107, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(157, 75, 107, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .music-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .song-card {
+                padding: 20px;
+            }
+            
+            .song-icon {
+                font-size: 2.2rem;
+            }
+            
+            .song-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوتات موسيقية عائمة للزينة -->
+    <div class="floating-note note1">♪</div>
+    <div class="floating-note note2">♫</div>
+    <div class="floating-note note3">♬</div>
+    
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> رجوع
+    </a>
+    
+    <div class="header">
+        <div class="name-container">
+            <h1>سلي وقتك يا وردايتي</h1>
+        </div>
+    </div>
+    
+    <h2 class="page-title">أغاني اتنين تلاتة بيسمعوها .... أنا منهم</h2>
+    
+    <div class="intro-text">
+        <p!</p>
+        <p>اختاري الأغنية اللي عايزة تسمعيها واستمتعي بوقتك يا وردايةِ ♫</p>
+    </div>
+    
+    <div class="music-container">
+        <!-- قولي - بيج سام -->
+        <div class="song-card">
+            <div class="song-icon">🎤</div>
+            <h3 class="song-title">قولي</h3>
+            <p class="song-artist">بيج سام</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1XoqIvE6VwvpMAfZK9iOt_jTXIsG_UTF9/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- علي بابه -->
+        <div class="song-card">
+            <div class="song-icon">🎧</div>
+            <h3 class="song-title">علي بابه</h3>
+            <p class="song-artist">مجهول (لكن جامدة!)</p>
+            <p class="song-description">حاسس إنه مريض نفسي بس الأغنية جامدة</p>
+            <a href="https://drive.google.com/file/d/1Y9WBCo7UM0nteBX4WyB7C_0QgorW4jzh/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- عبد الرحمن (أول أغنية) -->
+        <div class="song-card">
+            <div class="song-icon">🎵</div>
+            <h3 class="song-title">أغنية لعبد الرحمن</h3>
+            <p class="song-artist">عبد الرحمن</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1XpFZg8jWfA5LpUPSbo0n98Tcv21wLab3/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- عبد الرحمن (ثاني أغنية) -->
+        <div class="song-card">
+            <div class="song-icon">🎶</div>
+            <h3 class="song-title">أغنية لعبد الرحمن</h3>
+            <p class="song-artist">عبد الرحمن</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1Y3v_ZPTUcs4Uww1srMD5pHEHIiEwz9PE/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- عبد الرحمن (ثالث أغنية) -->
+        <div class="song-card">
+            <div class="song-icon">🎼</div>
+            <h3 class="song-title">أغنية لعبد الرحمن</h3>
+            <p class="song-artist">عبد الرحمن</p>
+            <p class="song-description">ثالث أغنية لعبد الرحمن</p>
+            <a href="https://drive.google.com/file/d/1Y47XU78qhyHugjX5E8R3uC__QFlJynEl/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- بركان - بيج سام -->
+        <div class="song-card">
+            <div class="song-icon">🔥</div>
+            <h3 class="song-title">بركان</h3>
+            <p class="song-artist">بيج سام</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1YF9NpxGckSSFapD2xA25DVc_IC40NciD/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- لا تعليق -->
+        <div class="song-card">
+            <div class="song-icon">🤷‍♂️</div>
+            <h3 class="song-title">لا تعليق</h3>
+            <p class="song-artist">-</p>
+            <p class="song-description">لا تعليق عموماً بس بسمعها</p>
+            <a href="https://drive.google.com/file/d/1YL-_6-SsZ2gPPw3Gdg8kKDUpdc_pUmC5/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- عبد الرحمن (رابع أغنية) -->
+        <div class="song-card">
+            <div class="song-icon">🎹</div>
+            <h3 class="song-title">أغنية لعبد الرحمن</h3>
+            <p class="song-artist">عبد الرحمن</p>
+            <p class="song-description">المرة الرابعة مع عبد الرحمن</p>
+            <a href="https://drive.google.com/file/d/1YO9cnsFpKKTIg470Ylc0bKMNovQH4neT/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- جورج وسوف -->
+        <div class="song-card">
+            <div class="song-icon">🎷</div>
+            <h3 class="song-title">جورج وسوف</h3>
+            <p class="song-artist">جورج وسوف</p>
+            <p class="song-description">مش بسمعه وبكرهه بس بسمع ديه!</p>
+            <a href="https://drive.google.com/file/d/1Y9x7Cscax44mKPlyaNa0up2mrZo1Tk3-/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- النجدة - رشيد كبال -->
+        <div class="song-card">
+            <div class="song-icon">🆘</div>
+            <h3 class="song-title">النجدة</h3>
+            <p class="song-artist">رشيد كبال</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1YCNpWFK7j_GxgkTyc-dyoaZeyakegnhu/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- كان نفسي - ويجز -->
+        <div class="song-card">
+            <div class="song-icon">💭</div>
+            <h3 class="song-title">كان نفسي</h3>
+            <p class="song-artist">ويجز</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1YNDFjBGxZHj6fCR6x-iSaOXok-RdAKYt/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- رغم -->
+        <div class="song-card">
+            <div class="song-icon">💔</div>
+            <h3 class="song-title">رغم</h3>
+            <p class="song-artist">-</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1Y6SpeouFUVpi0Fg2u0DqvJJlBcDqj1Nb/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- هحكي عنك -->
+        <div class="song-card">
+            <div class="song-icon">📖</div>
+            <h3 class="song-title">هحكي عنك</h3>
+            <p class="song-artist">-</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1Y572AXV3OljWcANF-uCsYdbBtkCnsb7U/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+        
+        <!-- واسي -->
+        <div class="song-card">
+            <div class="song-icon">😔</div>
+            <h3 class="song-title">واسي</h3>
+            <p class="song-artist">-</p>
+            <p class="song-description"></p>
+            <a href="https://drive.google.com/file/d/1YQ-H-wgjPyhe68h5lN_O0WFFv8ttLhWE/view?usp=drivesdk" target="_blank" class="play-btn">
+                <i class="fas fa-play"></i> استمع الآن
+            </a>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <a href="index.html" class="nav-btn">
+            <i class="fas fa-home"></i> الصفحة الرئيسية
+        </a>
+        <a href="books.html" class="nav-btn">
+            <i class="fas fa-book"></i> روايات وكتب
+        </a>
+        <a href="bakalemk.html" class="nav-btn">
+            <i class="fas fa-pen"></i> الدخول هنا اختياري
+        </a>
+        <a href="ahlam.html" class="nav-btn">
+            <i class="fas fa-moon"></i> أحلام آية
+        </a>
+        <a href="apath.html" class="nav-btn">
+            <i class="fas fa-infinity"></i> عبث
+        </a>
+        <a href="ahdaf.html" class="nav-btn">
+            <i class="fas fa-bullseye"></i> أهداف متهمش حد
+        </a>
+    </div>
+    
+    <div class="footer">
+        <p class="footer-text">تذكري دائما يا وردايةِ ، يحل لكي ما لا يحل لغيرك</p>
+    </div>
+    
+    <script>
+        // إضافة تأثيرات تفاعلية عند الضغط على زر التشغيل
+        document.querySelectorAll('.play-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // إضافة تأثير اهتزاز للبطاقة
+                const card = this.closest('.song-card');
+                card.style.transform = 'scale(0.98)';
+                card.style.boxShadow = '0 4px 15px rgba(157, 75, 107, 0.2)';
+                
+                setTimeout(() => {
+                    card.style.transform = '';
+                    card.style.boxShadow = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
