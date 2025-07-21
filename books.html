@@ -1,0 +1,508 @@
+<!DOCTYPE html>  
+<html lang="ar" dir="rtl">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>مكتبة آية - روايات وكتب</title>  
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
+    <style>  
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+        }  
+        
+        body {  
+            font-family: 'Amiri', serif;  
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6, #ffd6e7);  
+            color: #6d2c50;  
+            min-height: 100vh;  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+            padding: 20px;  
+            position: relative;  
+            overflow-x: hidden;  
+        }  
+          
+        body::before {  
+            content: "";  
+            position: absolute;  
+            top: 0;  
+            left: 0;  
+            right: 0;  
+            bottom: 0;  
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23ffb6c180" stroke-width="1" stroke-dasharray="5,5"/><circle cx="20" cy="20" r="3" fill="%23ffb6c1"/><circle cx="70" cy="40" r="4" fill="%23ffb6c1"/><circle cx="50" cy="80" r="2" fill="%23ffb6c1"/><circle cx="85" cy="15" r="3" fill="%23ffb6c1"/><circle cx="10" cy="60" r="2" fill="%23ffb6c1"/><circle cx="40" cy="30" r="3" fill="%23ffb6c1"/></svg>');  
+            opacity: 0.3;  
+            z-index: -1;  
+        }  
+          
+        .header {  
+            text-align: center;  
+            margin: 20px 0 30px;  
+            position: relative;  
+            width: 90%;  
+            max-width: 1000px;  
+        }  
+          
+        .name-container {  
+            position: relative;  
+            display: inline-block;  
+        }  
+          
+        h1 {  
+            font-family: 'Scheherazade New', serif;  
+            font-size: 3.5rem;  
+            color: #9d4b6b;  
+            text-shadow: 0 2px 8px rgba(157, 75, 107, 0.2);  
+            position: relative;  
+            z-index: 2;  
+            margin-bottom: 20px;  
+        }  
+          
+        .name-decoration {  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            transform: translate(-50%, -50%);  
+            width: 180px;  
+            height: 180px;  
+            background: radial-gradient(circle, #ffd1dc 0%, rgba(255,209,220,0) 70%);  
+            border-radius: 50%;  
+            z-index: 1;  
+            opacity: 0.7;  
+        }  
+          
+        .intro-text {  
+            max-width: 900px;  
+            margin: 0 auto 40px;  
+            padding: 30px;  
+            background: rgba(255, 255, 255, 0.8);  
+            border-radius: 20px;  
+            box-shadow: 0 8px 25px rgba(157, 75, 107, 0.15);  
+            border: 1px solid #f8d7e9;  
+            font-size: 1.5rem;  
+            line-height: 1.9;  
+            text-align: center;  
+            position: relative;  
+        }  
+          
+        .intro-text::before {  
+            content: "❝";  
+            position: absolute;  
+            top: 15px;  
+            right: 25px;  
+            font-size: 4rem;  
+            color: #ffb6c1;  
+            opacity: 0.3;  
+        }  
+          
+        .intro-text::after {  
+            content: "❞";  
+            position: absolute;  
+            bottom: -25px;  
+            left: 25px;  
+            font-size: 4rem;  
+            color: #ffb6c1;  
+            opacity: 0.3;  
+            transform: rotate(180deg);  
+        }  
+          
+        .books-container {  
+            display: grid;  
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));  
+            gap: 30px;  
+            width: 90%;  
+            max-width: 1300px;  
+            margin: 20px 0 50px;  
+        }  
+          
+        .book-card {  
+            background: linear-gradient(145deg, #ffffff, #fff9fb);  
+            border-radius: 20px;  
+            box-shadow: 0 8px 25px rgba(157, 75, 107, 0.15);  
+            padding: 25px;  
+            border: 1px solid #f8d7e9;  
+            transition: all 0.3s ease;  
+            display: flex;  
+            flex-direction: column;  
+            height: 100%;  
+        }  
+          
+        .book-card:hover {  
+            transform: translateY(-8px);  
+            box-shadow: 0 15px 35px rgba(157, 75, 107, 0.25);  
+        }  
+          
+        .book-header {  
+            display: flex;  
+            align-items: center;  
+            margin-bottom: 20px;  
+            padding-bottom: 15px;  
+            border-bottom: 1px solid #f8d7e9;  
+        }  
+          
+        .book-icon {  
+            font-size: 3rem;  
+            color: #d57a99;  
+            margin-left: 15px;  
+        }  
+          
+        .book-title {  
+            font-size: 1.7rem;  
+            font-weight: bold;  
+            color: #9d4b6b;  
+            line-height: 1.4;  
+        }  
+          
+        .book-description {  
+            font-size: 1.2rem;  
+            line-height: 1.8;  
+            color: #6d2c50;  
+            margin-bottom: 25px;  
+            flex-grow: 1;  
+        }  
+          
+        .book-link {  
+            display: inline-block;  
+            background: linear-gradient(145deg, #ffd6e7, #ffb6c1);  
+            color: #fff;  
+            border: none;  
+            border-radius: 30px;  
+            padding: 12px 25px;  
+            font-family: 'Amiri', serif;  
+            font-size: 1.3rem;  
+            font-weight: bold;  
+            box-shadow: 0 5px 15px rgba(157, 75, 107, 0.2);  
+            cursor: pointer;  
+            transition: all 0.3s ease;  
+            text-decoration: none;  
+            text-align: center;  
+        }  
+          
+        .book-link:hover {  
+            background: linear-gradient(145deg, #ffb6c1, #ffd6e7);  
+            transform: translateY(-3px);  
+            box-shadow: 0 8px 20px rgba(157, 75, 107, 0.3);  
+        }  
+          
+        .book-link i {  
+            margin-left: 8px;  
+        }  
+          
+        .floating-rose {  
+            position: absolute;  
+            z-index: -1;  
+            opacity: 0.1;  
+            font-size: 10rem;  
+            animation: float 15s infinite ease-in-out;  
+        }  
+          
+        .rose1 {  
+            top: 15%;  
+            left: 10%;  
+            animation-delay: 0s;  
+        }  
+          
+        .rose2 {  
+            bottom: 20%;  
+            right: 10%;  
+            animation-delay: -5s;  
+        }  
+          
+        @keyframes float {  
+            0%, 100% {  
+                transform: translateY(0) rotate(0deg);  
+            }  
+            50% {  
+                transform: translateY(-20px) rotate(10deg);  
+            }  
+        }  
+          
+        .navigation {  
+            display: flex;  
+            justify-content: center;  
+            margin: 30px 0;  
+            gap: 15px;  
+            flex-wrap: wrap;  
+        }  
+          
+        .nav-btn {  
+            background: linear-gradient(145deg, #ffffff, #fff0f5);  
+            border: none;  
+            border-radius: 15px;  
+            padding: 12px 25px;  
+            font-family: 'Amiri', serif;  
+            font-size: 1.2rem;  
+            color: #9d4b6b;  
+            box-shadow: 0 4px 10px rgba(157, 75, 107, 0.15);  
+            cursor: pointer;  
+            transition: all 0.3s ease;  
+            text-decoration: none;  
+            display: flex;  
+            align-items: center;  
+        }  
+          
+        .nav-btn:hover {  
+            transform: translateY(-2px);  
+            box-shadow: 0 6px 15px rgba(157, 75, 107, 0.2);  
+        }  
+          
+        .footer {  
+            text-align: center;  
+            margin-top: 20px;  
+            padding: 25px;  
+            background: rgba(255, 255, 255, 0.6);  
+            border-radius: 20px;  
+            width: 90%;  
+            max-width: 800px;  
+            box-shadow: 0 4px 15px rgba(157, 75, 107, 0.1);  
+            border: 1px solid #f8d7e9;  
+        }  
+          
+        .footer-text {  
+            font-size: 1.4rem;  
+            font-weight: bold;  
+            color: #9d4b6b;  
+            line-height: 1.5;  
+        }  
+          
+        @media (max-width: 900px) {  
+            .books-container {  
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
+            }  
+              
+            h1 {  
+                font-size: 2.8rem;  
+            }  
+              
+            .intro-text {  
+                font-size: 1.3rem;  
+            }  
+        }  
+          
+        @media (max-width: 600px) {  
+            h1 {  
+                font-size: 2.4rem;  
+            }  
+              
+            .book-card {  
+                padding: 20px;  
+            }  
+              
+            .book-title {  
+                font-size: 1.5rem;  
+            }  
+              
+            .book-description {  
+                font-size: 1.1rem;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <!-- وردات عائمة للزينة -->  
+    <div class="floating-rose rose1">🌹</div>  
+    <div class="floating-rose rose2">🌹</div>  
+
+    <div class="header">  
+        <div class="name-container">  
+            <div class="name-decoration"></div>  
+            <h1>مكتبة آية</h1>  
+        </div>  
+          
+        <div class="intro-text">  
+            <p>ان شاء الله هملالك الصفحة ديه روايات وكتب، تكون مكتبة كاملة خاصة بيكي انتي يا وردتي ان شاء الله</p>  
+            <p>ومع الوقت هطورلك برضو ف الموقع اكتر بحيث يكون فيه حاجات كتير فيديوهات و أفلام</p>  
+            <p>هخليه عالم خاص بيكي انتي لوحدك ان شاء الله</p>  
+        </div>  
+    </div>  
+      
+    <div class="books-container">  
+        <!-- عزازيل -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">📜</div>  
+                <h2 class="book-title">عزازيل</h2>  
+            </div>  
+            <p class="book-description">رواية تاريخية فلسفية تحكي قصة راهب مصري في القرن الخامس الميلادي، تتعرض لصراعات الإنسان بين الإيمان والشك، الحقيقة والوهم. من أشهر أعمال الدكتور يوسف زيدان والحائزة على البوكر العربية.</p>  
+            <a href="azazel.html" class="book-link" target="_blank">  
+                اقرأ الرواية <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- في قلبي أنثى عبرية -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">❤️</div>  
+                <h2 class="book-title">في قلبي أنثى عبرية</h2>  
+            </div>  
+            <p class="book-description">رواية رومانسية اجتماعية للكاتبة خولة حمدي، تحكي قصة حب بين شاب فلسطيني وفتاة إسرائيلية، تتعرض لصراع الهوية والحب في ظل الاحتلال. رواية مؤثرة تبحث في معنى الإنسانية والحب.</p>  
+            <a href="female_hebrew.html" class="book-link" target="_blank">  
+                اقرأ الرواية <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- ليطمئن قلبي -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🕊️</div>  
+                <h2 class="book-title">ليطمئن قلبي</h2>  
+            </div>  
+            <p class="book-description">رواية دينية رائعة للكاتب أحمد خيري العمري، تقدم رحلة روحية للإنسان المعاصر في بحثه عن الإيمان واليقين. تقدم الرواية إجابات عميقة عن أسئلة الوجود والإيمان بطريقة أدبية رفيعة.</p>  
+            <a href="heart_assurance.html" class="book-link" target="_blank">  
+                اقرأ الرواية <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أبابيل الجزء الأول -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🕋</div>  
+                <h2 class="book-title">أبابيل الجزء الأول</h2>  
+            </div>  
+            <p class="book-description">رواية خيال علمي إسلامي من تأليف أحمد خالد مصطفى، تقدم رؤية مستقبلية للعالم الإسلامي في عام 2050. تتعرض الرواية لصراع بين الخير والشر في عالم متطور تكنولوجياً.</p>  
+            <a href="ababeel1.html" class="book-link" target="_blank">  
+                اقرأ الجزء الأول <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أبابيل الجزء الثاني -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🕌</div>  
+                <h2 class="book-title">أبابيل الجزء الثاني</h2>  
+            </div>  
+            <p class="book-description">استكمال لأحداث الجزء الأول من سلسلة أبابيل، حيث تستمر المغامرة في عالم المستقبل الإسلامي. تعمق الرواية في الصراع الكوني وتكشف المزيد من الأسرار والخيال العلمي المميز.</p>  
+            <a href="ababeel2.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثاني <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أبابيل الجزء الثالث -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">✈️</div>  
+                <h2 class="book-title">أبابيل الجزء الثالث</h2>  
+            </div>  
+            <p class="book-description">الجزء الثالث من سلسلة أبابيل الشهيرة، يواصل الكاتب أحمد خالد مصطفى رحلته في عالم الخيال العلمي الإسلامي، مقدماً مفاجآت وحلولاً جديدة لأحداث الرواية.</p>  
+            <a href="ababeel3.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثالث <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أبابيل الجزء الرابع -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🛸</div>  
+                <h2 class="book-title">أبابيل الجزء الرابع</h2>  
+            </div>  
+            <p class="book-description">الجزء الأخير من سلسلة أبابيل، يقدم خاتمة مثيرة ومشوقة لأحداث الرواية، ويكشف عن المصير النهائي للشخصيات والأحداث في هذا العالم الخيالي الفريد.</p>  
+            <a href="ababeel4.html" class="book-link" target="_blank">  
+                اقرأ الجزء الرابع <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أرض زيكولا الجزء الأول -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🌍</div>  
+                <h2 class="book-title">أرض زيكولا الجزء الأول</h2>  
+            </div>  
+            <p class="book-description">رواية خيال علمي مغامرات من تأليف أحمد خيري العمري، تقدم عالمًا خياليًا بديعًا مليئًا بالمفاجآت. تتبع الرواية رحلة البطل في اكتشاف عالم جديد والبحث عن الحقيقة.</p>  
+            <a href="zikola1.html" class="book-link" target="_blank">  
+                اقرأ الجزء الأول <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أرض زيكولا الجزء الثاني -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🗺️</div>  
+                <h2 class="book-title">أرض زيكولا الجزء الثاني</h2>  
+            </div>  
+            <p class="book-description">استمرار لرحلة البطل في عالم زيكولا الخيالي، حيث يكتشف المزيد من الأسرار ويتعرض لتحديات جديدة. الرواية تقدم رؤية فلسفية عميقة في قالب مغامرات مشوق.</p>  
+            <a href="zikola2.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثاني <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- أرض زيكولا الجزء الثالث -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🔮</div>  
+                <h2 class="book-title">أرض زيكولا الجزء الثالث</h2>  
+            </div>  
+            <p class="book-description">الجزء الأخير من ثلاثية أرض زيكولا، يقدم خاتمة مشبعة بالعواطف والأحداث المثيرة. يصل البطل إلى نهاية رحلته ويكتشف الحقيقة الكاملة عن عالم زيكولا.</p>  
+            <a href="zikola3.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثالث <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- رواية خوف الجزء الأول -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">😨</div>  
+                <h2 class="book-title">خوف الجزء الأول</h2>  
+            </div>  
+            <p class="book-description">رواية رعب نفسي من تأليف أحمد خالد توفيق، تقدم قصة مرعبة تبحث في أغوار النفس البشرية. تتعرض الرواية لظواهر غريبة وأحداث مرعبة تثير الخوف في القارئ.</p>  
+            <a href="fear1.html" class="book-link" target="_blank">  
+                اقرأ الجزء الأول <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- رواية خوف الجزء الثاني -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">👻</div>  
+                <h2 class="book-title">خوف الجزء الثاني</h2>  
+            </div>  
+            <p class="book-description">استمرار لأحداث الجزء الأول من رواية خوف، حيث تتكشف المزيد من الأسرار المرعبة وتتعمق الأحداث في الغموض. رواية تشد القارئ من البداية حتى النهاية.</p>  
+            <a href="fear2.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثاني <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- رواية خوف الجزء الثالث -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">💀</div>  
+                <h2 class="book-title">خوف الجزء الثالث</h2>  
+            </div>  
+            <p class="book-description">الجزء الأخير من ثلاثية الخوف، يقدم نهاية مشوقة ومفاجئة لأحداث الرواية المرعبة. يكشف الكاتب عن الحقيقة الكاملة وراء الأحداث الغريبة التي واجهها الأبطال.</p>  
+            <a href="fear3.html" class="book-link" target="_blank">  
+                اقرأ الجزء الثالث <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- رواية ذهب مع الريح -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🌪️</div>  
+                <h2 class="book-title">ذهب مع الريح</h2>  
+            </div>  
+            <p class="book-description">رواية تاريخية رومانسية كلاسيكية من تأليف مارغريت ميتشل، تحكي قصة حب مضطربة خلال الحرب الأهلية الأمريكية. تعتبر من أشهر الروايات العالمية وأكثرها مبيعاً.</p>  
+            <a href="gone_with_wind.html" class="book-link" target="_blank">  
+                اقرأ الرواية <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+          
+        <!-- رواية مائة عام من العزلة -->  
+        <div class="book-card">  
+            <div class="book-header">  
+                <div class="book-icon">🏰</div>  
+                <h2 class="book-title">مائة عام من العزلة</h2>  
+            </div>  
+            <p class="book-description">رواية عظيمة للكاتب غابرييل غارسيا ماركيز، الحائز على جائزة نوبل للآداب. تروي قصة عائلة بوينديا على مدار مائة عام في قرية ماكوندو الخيالية. تحفة أدبية من روائع الأدب العالمي.</p>  
+            <a href="hundred_years.html" class="book-link" target="_blank">  
+                اقرأ الرواية <i class="fas fa-book-open"></i>  
+            </a>  
+        </div>  
+    </div>  
+      
+    <div class="navigation">  
+        <a href="index.html" class="nav-btn">الصفحة الرئيسية</a>  
+        <a href="diary.html" class="nav-btn">مذكرات</a>  
+        <a href="moon.html" class="nav-btn">تنظيم يوم القمر</a>  
+        <a href="god.h
