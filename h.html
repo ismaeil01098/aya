@@ -4,272 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كروت الطلاب - مدرسة الجيل الجديد</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f0f2f5;
+            padding: 15px;
             color: #333;
-            padding: 20px;
-            min-height: 100vh;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(to right, #1a237e, #283593);
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #1a237e;
             color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
         }
         
         .header h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
             color: #ffeb3b;
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         .controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 10px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
         .btn {
-            padding: 12px 25px;
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            padding: 10px 20px;
+            background: #4CAF50;
             color: white;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+            max-width: 200px;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            background: #388E3C;
         }
         
         .btn-export {
-            background: linear-gradient(to right, #2196F3, #0D47A1);
+            background: #2196F3;
+        }
+        
+        .btn-export:hover {
+            background: #1976D2;
         }
         
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
         }
         
         .student-card {
             background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            position: relative;
-            border: 8px solid transparent;
-            background-clip: padding-box;
-        }
-        
-        .student-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
-        }
-        
-        .student-card.male {
-            border-image: linear-gradient(45deg, #1a237e, #2196F3) 1;
-        }
-        
-        .student-card.female {
-            border-image: linear-gradient(45deg, #880e4f, #f06292) 1;
-        }
-        
-        .card-header {
-            background: linear-gradient(to right, #1a237e, #283593);
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
-        }
-        
-        .card-header h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .card-header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .card-body {
-            padding: 30px 25px;
-            text-align: center;
-        }
-        
-        .student-name {
-            font-size: 1.8rem;
-            color: #1a237e;
-            margin-bottom: 15px;
-            font-weight: bold;
-            line-height: 1.4;
-        }
-        
-        .student-code {
-            font-size: 1.6rem;
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
-            color: white;
-            padding: 12px 20px;
             border-radius: 12px;
-            display: inline-block;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-            font-weight: bold;
-            margin-top: 10px;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-        }
-        
-        .school-name {
-            font-size: 1.4rem;
-            color: #283593;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        
-        .system-name {
-            font-size: 1.1rem;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .card-footer {
-            background: #f5f5f5;
-            padding: 20px;
+            padding: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
             text-align: center;
-            border-top: 1px solid #e0e0e0;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .gender-icon {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            aspect-ratio: 1;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            border: 3px solid #1a237e;
+            position: relative;
         }
         
         .serial-number {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.2);
+            top: 8px;
+            left: 8px;
+            background: #1a237e;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.9rem;
             font-weight: bold;
-            font-size: 1.1rem;
+        }
+        
+        .student-name {
+            font-size: 1rem;
+            color: #1a237e;
+            margin-bottom: 12px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        
+        .student-code {
+            font-size: 1.2rem;
+            background: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: bold;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+        
+        .school-name {
+            font-size: 0.9rem;
+            color: #1a237e;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        
+        .system-name {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 3px;
         }
         
         .footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
+            padding: 15px;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border-top: 1px solid #ddd;
+            margin-top: 20px;
         }
         
+        @media (max-width: 360px) {
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+        }
+        
+        /* إخفاء العناصر عند الطباعة */
         @media print {
             .controls, .footer {
                 display: none;
             }
             
+            body {
+                padding: 0;
+            }
+            
             .cards-container {
-                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
             }
             
             .student-card {
                 break-inside: avoid;
+                margin: 5px;
                 box-shadow: none;
-                border: 1px solid #ddd;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .cards-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .student-name {
-                font-size: 1.5rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 80%;
-                justify-content: center;
+                border: 2px solid #1a237e;
             }
         }
     </style>
@@ -282,140 +201,129 @@
     </div>
     
     <div class="controls">
-        <button class="btn" id="printBtn">
-            <i class="fas fa-print"></i> طباعة الكروت
-        </button>
-        <button class="btn btn-export" id="exportBtn">
-            <i class="fas fa-file-pdf"></i> تصدير كملف PDF
-        </button>
-        <button class="btn" id="toggleViewBtn">
-            <i class="fas fa-eye"></i> تبديل العرض
-        </button>
+        <button class="btn" id="printBtn">طباعة الكروت</button>
+        <button class="btn btn-export" id="exportBtn">تصدير للهاتف</button>
     </div>
     
     <div class="cards-container" id="cardsContainer"></div>
     
     <div class="footer">
-        <p>© 2023 مدرسة الجيل الجديد الخاصة - نظام الامتحانات الإلكترونية</p>
-        <p>تم إنشاء الكروت تلقائياً باستخدام النظام الإلكتروني للمدرسة</p>
+        <p>© 2023 مدرسة الجيل الجديد الخاصة</p>
+        <p>نظام الامتحانات الإلكترونية</p>
     </div>
 
-    <!-- مكتبة jsPDF لتصدير PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
     <script>
         // بيانات الطلاب
         const students = [
             // ذكور
-            {serial: 1, name: "احمد ايمن سيد يونس", code: "A24782043", gender: "male"},
-            {serial: 2, name: "أحمد محمد سيد محمود", code: "A19172610", gender: "male"},
-            {serial: 3, name: "أحمد محمد عبود عباس", code: "A20395102", gender: "male"},
-            {serial: 4, name: "آدم أحمد محمد حسن", code: "A36115906", gender: "male"},
-            {serial: 5, name: "ادم محمد عادل الشيمى عشماوى", code: "A82493077", gender: "male"},
-            {serial: 6, name: "آدم ياسر ناصر محمد", code: "A21799276", gender: "male"},
-            {serial: 7, name: "اسر احمد عبد النبي مصطفي", code: "A87883732", gender: "male"},
-            {serial: 8, name: "آسر سالم عبد المنعم سالم", code: "A55030440", gender: "male"},
-            {serial: 9, name: "أنس عبد الجواد البدرى فهمي", code: "A68647755", gender: "male"},
-            {serial: 10, name: "جاسم أحمد سعيد علي", code: "A87922055", gender: "male"},
-            {serial: 11, name: "جمال إبراهيم جمال عبد القادر", code: "A25819259", gender: "male"},
-            {serial: 12, name: "حسن صبري حسن ابراهيم", code: "A50898040", gender: "male"},
-            {serial: 13, name: "حمزة محمود عطاالله محمد", code: "A46200756", gender: "male"},
-            {serial: 14, name: "حمزه ايمن خلف السيد", code: "A61725534", gender: "male"},
-            {serial: 15, name: "حمزه سيد عبد المحسن السيد", code: "A20501326", gender: "male"},
-            {serial: 16, name: "حمزه عمرو رفيق سيد", code: "A81112417", gender: "male"},
-            {serial: 17, name: "حمزه عمرو محمود علي عرفه", code: "A85751821", gender: "male"},
-            {serial: 18, name: "حمزه محمد مصطفي أحمد", code: "A29446048", gender: "male"},
-            {serial: 19, name: "خالد محمود خالد حسين", code: "A85863831", gender: "male"},
-            {serial: 20, name: "سليم إسلام جمعة محمود", code: "A73055163", gender: "male"},
-            {serial: 21, name: "سمير محمد سمير محمد", code: "A60315143", gender: "male"},
-            {serial: 22, name: "عبد العاطى احمد عبد العاطي علي", code: "A24637755", gender: "male"},
-            {serial: 23, name: "عبدالرحمن سامح عبدالنبى ابوالحديد", code: "A79543936", gender: "male"},
-            {serial: 24, name: "عبدالرحمن هانى زهران السيد", code: "A40571969", gender: "male"},
-            {serial: 25, name: "عصام عصام عبد ربه محمد", code: "A47626339", gender: "male"},
-            {serial: 26, name: "علي حسين علي حسن علي", code: "A30446131", gender: "male"},
-            {serial: 27, name: "عمر تامر عبد النبي سعد", code: "A85294123", gender: "male"},
-            {serial: 28, name: "عمر عبد العليم علاء عبد العليم", code: "A52048313", gender: "male"},
-            {serial: 29, name: "عمر محمد أحمد أبو اليمين", code: "A67608284", gender: "male"},
-            {serial: 30, name: "عمر محمد سيد هشام", code: "A99547419", gender: "male"},
-            {serial: 31, name: "عوض اسلام عوض علي", code: "A13686665", gender: "male"},
-            {serial: 32, name: "كاراس ثروت عبد النور صليب", code: "A63047303", gender: "male"},
-            {serial: 33, name: "كامل صدام كامل حسين", code: "A70732259", gender: "male"},
-            {serial: 34, name: "كيرلس جرجس رزق إبراهيم", code: "A10549479", gender: "male"},
-            {serial: 35, name: "مالك أحمد السيد عبد الحليم", code: "A55769513", gender: "male"},
-            {serial: 36, name: "مالك أحمد محمد محمود", code: "A32746970", gender: "male"},
-            {serial: 37, name: "مالك إسلام صابر سعد", code: "A86228180", gender: "male"},
-            {serial: 38, name: "مالك رضا عزوز محمد", code: "A20753818", gender: "male"},
-            {serial: 39, name: "مالك رضوان عبد الله محمد", code: "A69696185", gender: "male"},
-            {serial: 40, name: "مالك محمود زغلول حميدة", code: "A22028955", gender: "male"},
-            {serial: 41, name: "مالك مصطفي فتحي الششتاوي", code: "A20397422", gender: "male"},
-            {serial: 42, name: "محمد أشرف محمد طه", code: "A86222895", gender: "male"},
-            {serial: 43, name: "محمد تامر رشاد علي", code: "A78840237", gender: "male"},
-            {serial: 44, name: "محمد عادل عبد الرحمن عبد العليم", code: "A67083107", gender: "male"},
-            {serial: 45, name: "محمد عادل محمد جمعه", code: "A51480969", gender: "male"},
-            {serial: 46, name: "محمد عبد الله سراج الدين مرسي", code: "A62488612", gender: "male"},
-            {serial: 47, name: "محمد عصام حمزه علي", code: "A76875384", gender: "male"},
-            {serial: 48, name: "محمد عماد السيد مكاوى", code: "A40276568", gender: "male"},
-            {serial: 49, name: "محمد عماد رمضان همام", code: "A29140124", gender: "male"},
-            {serial: 50, name: "محمد عمرو محمد عبد المهيمين", code: "A63532802", gender: "male"},
-            {serial: 51, name: "محمد محمد عبدالتواب محمد", code: "A35361214", gender: "male"},
-            {serial: 52, name: "مروان أحمد عادل عطيه", code: "A46333847", gender: "male"},
-            {serial: 53, name: "مروان محمد رمضان علي", code: "A59427573", gender: "male"},
-            {serial: 54, name: "مصطفي محمد السيد عطيه", code: "A30738129", gender: "male"},
-            {serial: 55, name: "مؤمن محمد عبد اللطيف مرسي", code: "A49111806", gender: "male"},
-            {serial: 56, name: "نور سمير مدحت محمود", code: "A56294419", gender: "male"},
-            {serial: 57, name: "ياسين عبد الرحمن هاشم رمضان", code: "A51078463", gender: "male"},
-            {serial: 58, name: "ياسين محمد جابر عبد الرحمن", code: "A34881723", gender: "male"},
-            {serial: 59, name: "ياسين محمد عثمان تمام", code: "A69328226", gender: "male"},
-            {serial: 60, name: "يوسف محمد مجدي عبد الرحمن", code: "A21822221", gender: "male"},
+            {serial: 1, name: "احمد ايمن سيد يونس", code: "A24782043"},
+            {serial: 2, name: "أحمد محمد سيد محمود", code: "A19172610"},
+            {serial: 3, name: "أحمد محمد عبود عباس", code: "A20395102"},
+            {serial: 4, name: "آدم أحمد محمد حسن", code: "A36115906"},
+            {serial: 5, name: "ادم محمد عادل الشيمى عشماوى", code: "A82493077"},
+            {serial: 6, name: "آدم ياسر ناصر محمد", code: "A21799276"},
+            {serial: 7, name: "اسر احمد عبد النبي مصطفي", code: "A87883732"},
+            {serial: 8, name: "آسر سالم عبد المنعم سالم", code: "A55030440"},
+            {serial: 9, name: "أنس عبد الجواد البدرى فهمي", code: "A68647755"},
+            {serial: 10, name: "جاسم أحمد سعيد علي", code: "A87922055"},
+            {serial: 11, name: "جمال إبراهيم جمال عبد القادر", code: "A25819259"},
+            {serial: 12, name: "حسن صبري حسن ابراهيم", code: "A50898040"},
+            {serial: 13, name: "حمزة محمود عطاالله محمد", code: "A46200756"},
+            {serial: 14, name: "حمزه ايمن خلف السيد", code: "A61725534"},
+            {serial: 15, name: "حمزه سيد عبد المحسن السيد", code: "A20501326"},
+            {serial: 16, name: "حمزه عمرو رفيق سيد", code: "A81112417"},
+            {serial: 17, name: "حمزه عمرو محمود علي عرفه", code: "A85751821"},
+            {serial: 18, name: "حمزه محمد مصطفي أحمد", code: "A29446048"},
+            {serial: 19, name: "خالد محمود خالد حسين", code: "A85863831"},
+            {serial: 20, name: "سليم إسلام جمعة محمود", code: "A73055163"},
+            {serial: 21, name: "سمير محمد سمير محمد", code: "A60315143"},
+            {serial: 22, name: "عبد العاطى احمد عبد العاطي علي", code: "A24637755"},
+            {serial: 23, name: "عبدالرحمن سامح عبدالنبى ابوالحديد", code: "A79543936"},
+            {serial: 24, name: "عبدالرحمن هانى زهران السيد", code: "A40571969"},
+            {serial: 25, name: "عصام عصام عبد ربه محمد", code: "A47626339"},
+            {serial: 26, name: "علي حسين علي حسن علي", code: "A30446131"},
+            {serial: 27, name: "عمر تامر عبد النبي سعد", code: "A85294123"},
+            {serial: 28, name: "عمر عبد العليم علاء عبد العليم", code: "A52048313"},
+            {serial: 29, name: "عمر محمد أحمد أبو اليمين", code: "A67608284"},
+            {serial: 30, name: "عمر محمد سيد هشام", code: "A99547419"},
+            {serial: 31, name: "عوض اسلام عوض علي", code: "A13686665"},
+            {serial: 32, name: "كاراس ثروت عبد النور صليب", code: "A63047303"},
+            {serial: 33, name: "كامل صدام كامل حسين", code: "A70732259"},
+            {serial: 34, name: "كيرلس جرجس رزق إبراهيم", code: "A10549479"},
+            {serial: 35, name: "مالك أحمد السيد عبد الحليم", code: "A55769513"},
+            {serial: 36, name: "مالك أحمد محمد محمود", code: "A32746970"},
+            {serial: 37, name: "مالك إسلام صابر سعد", code: "A86228180"},
+            {serial: 38, name: "مالك رضا عزوز محمد", code: "A20753818"},
+            {serial: 39, name: "مالك رضوان عبد الله محمد", code: "A69696185"},
+            {serial: 40, name: "مالك محمود زغلول حميدة", code: "A22028955"},
+            {serial: 41, name: "مالك مصطفي فتحي الششتاوي", code: "A20397422"},
+            {serial: 42, name: "محمد أشرف محمد طه", code: "A86222895"},
+            {serial: 43, name: "محمد تامر رشاد علي", code: "A78840237"},
+            {serial: 44, name: "محمد عادل عبد الرحمن عبد العليم", code: "A67083107"},
+            {serial: 45, name: "محمد عادل محمد جمعه", code: "A51480969"},
+            {serial: 46, name: "محمد عبد الله سراج الدين مرسي", code: "A62488612"},
+            {serial: 47, name: "محمد عصام حمزه علي", code: "A76875384"},
+            {serial: 48, name: "محمد عماد السيد مكاوى", code: "A40276568"},
+            {serial: 49, name: "محمد عماد رمضان همام", code: "A29140124"},
+            {serial: 50, name: "محمد عمرو محمد عبد المهيمين", code: "A63532802"},
+            {serial: 51, name: "محمد محمد عبدالتواب محمد", code: "A35361214"},
+            {serial: 52, name: "مروان أحمد عادل عطيه", code: "A46333847"},
+            {serial: 53, name: "مروان محمد رمضان علي", code: "A59427573"},
+            {serial: 54, name: "مصطفي محمد السيد عطيه", code: "A30738129"},
+            {serial: 55, name: "مؤمن محمد عبد اللطيف مرسي", code: "A49111806"},
+            {serial: 56, name: "نور سمير مدحت محمود", code: "A56294419"},
+            {serial: 57, name: "ياسين عبد الرحمن هاشم رمضان", code: "A51078463"},
+            {serial: 58, name: "ياسين محمد جابر عبد الرحمن", code: "A34881723"},
+            {serial: 59, name: "ياسين محمد عثمان تمام", code: "A69328226"},
+            {serial: 60, name: "يوسف محمد مجدي عبد الرحمن", code: "A21822221"},
             
             // إناث
-            {serial: 63, name: "اسيل محمدى منصور محمد", code: "A75568337", gender: "female"},
-            {serial: 64, name: "بتول رومانى حمدى بخيت", code: "A75320335", gender: "female"},
-            {serial: 65, name: "تالين محمود صفوت السيد", code: "A12282230", gender: "female"},
-            {serial: 66, name: "تقى زكريا حمزة محمد", code: "A81188020", gender: "female"},
-            {serial: 67, name: "جودى احمد محى الدين امام", code: "A49401226", gender: "female"},
-            {serial: 68, name: "جودى سيد منصور سيد", code: "A19490372", gender: "female"},
-            {serial: 69, name: "جودي عبد الوهاب وجدي", code: "A33572786", gender: "female"},
-            {serial: 70, name: "حبيبة محمد مصطفي محمد", code: "A87469252", gender: "female"},
-            {serial: 71, name: "ديما شهاب مرزوق محمد", code: "A91944906", gender: "female"},
-            {serial: 72, name: "رقيه محمد رضا على", code: "A48239105", gender: "female"},
-            {serial: 73, name: "رنا اسماعيل الشامى مصطفى", code: "A64086284", gender: "female"},
-            {serial: 74, name: "رودين محمد نبيل مختار", code: "A10895764", gender: "female"},
-            {serial: 75, name: "رودينا على سنوسى سيد", code: "A34899244", gender: "female"},
-            {serial: 76, name: "روضة كريم احمد امين", code: "A47816137", gender: "female"},
-            {serial: 77, name: "ريتاج هانى شعبان السنوسى", code: "A47223978", gender: "female"},
-            {serial: 78, name: "ريتال معتز بالله محمد على احمد", code: "A52602359", gender: "female"},
-            {serial: 79, name: "ريتال ممدوح محمد ابراهيم", code: "A74133690", gender: "female"},
-            {serial: 80, name: "زينة أحمد علي عمر", code: "A96507602", gender: "female"},
-            {serial: 81, name: "سبأ علي إسماعيل عبدالمنعم", code: "A10896528", gender: "female"},
-            {serial: 82, name: "سجده ايمن سيد يونس", code: "A13724779", gender: "female"},
-            {serial: 83, name: "سجده وليد محمد محمد", code: "A56654165", gender: "female"},
-            {serial: 84, name: "سلمى امام محمد امام", code: "A83385817", gender: "female"},
-            {serial: 85, name: "سهيلة احمد صابر عبد العليم", code: "A91909945", gender: "female"},
-            {serial: 86, name: "شادية عبد المنعم عادل عبد المنعم", code: "A99293850", gender: "female"},
-            {serial: 87, name: "شمس محمد رفيق سيد علي", code: "A83468484", gender: "female"},
-            {serial: 88, name: "فاطمة محمود ابراهيم محمد", code: "A86100821", gender: "female"},
-            {serial: 89, name: "فاطمه حسين نصر حسين", code: "A99874575", gender: "female"},
-            {serial: 90, name: "فريدة زكريا جلال حسن", code: "A53785798", gender: "female"},
-            {serial: 91, name: "فريدة عبد اللطيف عيد عبد اللطيف", code: "A85725760", gender: "female"},
-            {serial: 92, name: "فريدة محمد محمد مصطفي", code: "A20135621", gender: "female"},
-            {serial: 93, name: "كارما كريم محمود عبد العزيز", code: "A84354625", gender: "female"},
-            {serial: 94, name: "كنزي يسري علي فرج", code: "A84958667", gender: "female"},
-            {serial: 95, name: "كوثر مصطفي عبد المحسن عبد اللطيف", code: "A18428239", gender: "female"},
-            {serial: 96, name: "مريم حسين محمد عادل", code: "A62172686", gender: "female"},
-            {serial: 97, name: "مريم محمود سراج الدين مرسي", code: "A40035706", gender: "female"},
-            {serial: 98, name: "مريم مصطفي إسماعيل عبد اللطيف", code: "A66905929", gender: "female"},
-            {serial: 99, name: "مكه رامى محمد شحاتة", code: "A10864729", gender: "female"},
-            {serial: 100, name: "مكه عزمي عزمي محمد", code: "A36105938", gender: "female"},
-            {serial: 101, name: "ملك أشرف جمعة محمد", code: "A94770829", gender: "female"},
-            {serial: 102, name: "ملك عمرو فتحي عبد السميع", code: "A70585784", gender: "female"},
-            {serial: 103, name: "مليكه خالد علي أحمد", code: "A77143853", gender: "female"},
-            {serial: 104, name: "ندي سيد معوض عبد الشفيع", code: "A25553346", gender: "female"},
-            {serial: 105, name: "هداية محمود مصلح فاروق", code: "A23993364", gender: "female"},
-            {serial: 106, name: "وسيلة محمد حسنين حسين", code: "A99626562", gender: "female"},
-            {serial: 107, name: "وعد محمد ناجي حسين", code: "A79595496", gender: "female"},
-            {serial: 108, name: "ياسمين أحمد هلال", code: "A19647911", gender: "female"}
+            {serial: 63, name: "اسيل محمدى منصور محمد", code: "A75568337"},
+            {serial: 64, name: "بتول رومانى حمدى بخيت", code: "A75320335"},
+            {serial: 65, name: "تالين محمود صفوت السيد", code: "A12282230"},
+            {serial: 66, name: "تقى زكريا حمزة محمد", code: "A81188020"},
+            {serial: 67, name: "جودى احمد محى الدين امام", code: "A49401226"},
+            {serial: 68, name: "جودى سيد منصور سيد", code: "A19490372"},
+            {serial: 69, name: "جودي عبد الوهاب وجدي", code: "A33572786"},
+            {serial: 70, name: "حبيبة محمد مصطفي محمد", code: "A87469252"},
+            {serial: 71, name: "ديما شهاب مرزوق محمد", code: "A91944906"},
+            {serial: 72, name: "رقيه محمد رضا على", code: "A48239105"},
+            {serial: 73, name: "رنا اسماعيل الشامى مصطفى", code: "A64086284"},
+            {serial: 74, name: "رودين محمد نبيل مختار", code: "A10895764"},
+            {serial: 75, name: "رودينا على سنوسى سيد", code: "A34899244"},
+            {serial: 76, name: "روضة كريم احمد امين", code: "A47816137"},
+            {serial: 77, name: "ريتاج هانى شعبان السنوسى", code: "A47223978"},
+            {serial: 78, name: "ريتال معتز بالله محمد على احمد", code: "A52602359"},
+            {serial: 79, name: "ريتال ممدوح محمد ابراهيم", code: "A74133690"},
+            {serial: 80, name: "زينة أحمد علي عمر", code: "A96507602"},
+            {serial: 81, name: "سبأ علي إسماعيل عبدالمنعم", code: "A10896528"},
+            {serial: 82, name: "سجده ايمن سيد يونس", code: "A13724779"},
+            {serial: 83, name: "سجده وليد محمد محمد", code: "A56654165"},
+            {serial: 84, name: "سلمى امام محمد امام", code: "A83385817"},
+            {serial: 85, name: "سهيلة احمد صابر عبد العليم", code: "A91909945"},
+            {serial: 86, name: "شادية عبد المنعم عادل عبد المنعم", code: "A99293850"},
+            {serial: 87, name: "شمس محمد رفيق سيد علي", code: "A83468484"},
+            {serial: 88, name: "فاطمة محمود ابراهيم محمد", code: "A86100821"},
+            {serial: 89, name: "فاطمه حسين نصر حسين", code: "A99874575"},
+            {serial: 90, name: "فريدة زكريا جلال حسن", code: "A53785798"},
+            {serial: 91, name: "فريدة عبد اللطيف عيد عبد اللطيف", code: "A85725760"},
+            {serial: 92, name: "فريدة محمد محمد مصطفي", code: "A20135621"},
+            {serial: 93, name: "كارما كريم محمود عبد العزيز", code: "A84354625"},
+            {serial: 94, name: "كنزي يسري علي فرج", code: "A84958667"},
+            {serial: 95, name: "كوثر مصطفي عبد المحسن عبد اللطيف", code: "A18428239"},
+            {serial: 96, name: "مريم حسين محمد عادل", code: "A62172686"},
+            {serial: 97, name: "مريم محمود سراج الدين مرسي", code: "A40035706"},
+            {serial: 98, name: "مريم مصطفي إسماعيل عبد اللطيف", code: "A66905929"},
+            {serial: 99, name: "مكه رامى محمد شحاتة", code: "A10864729"},
+            {serial: 100, name: "مكه عزمي عزمي محمد", code: "A36105938"},
+            {serial: 101, name: "ملك أشرف جمعة محمد", code: "A94770829"},
+            {serial: 102, name: "ملك عمرو فتحي عبد السميع", code: "A70585784"},
+            {serial: 103, name: "مليكه خالد علي أحمد", code: "A77143853"},
+            {serial: 104, name: "ندي سيد معوض عبد الشفيع", code: "A25553346"},
+            {serial: 105, name: "هداية محمود مصلح فاروق", code: "A23993364"},
+            {serial: 106, name: "وسيلة محمد حسنين حسين", code: "A99626562"},
+            {serial: 107, name: "وعد محمد ناجي حسين", code: "A79595496"},
+            {serial: 108, name: "ياسمين أحمد هلال", code: "A19647911"}
         ];
 
         // إنشاء الكروت
@@ -425,30 +333,14 @@
             
             students.forEach(student => {
                 const card = document.createElement('div');
-                card.className = `student-card ${student.gender}`;
-                
-                const genderIcon = student.gender === 'male' ? 
-                    '<i class="fas fa-mars"></i>' : 
-                    '<i class="fas fa-venus"></i>';
-                
-                const genderText = student.gender === 'male' ? 'طالب' : 'طالبة';
+                card.className = 'student-card';
                 
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="gender-icon">${genderIcon}</div>
-                        <div class="serial-number">${student.serial}</div>
-                        <h3>${genderText}</h3>
-                        <p>الصف الرابع الابتدائي</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="student-name">${student.name}</div>
-                        <div class="student-code">${student.code}</div>
-                        <div class="school-name">مدرسة الجيل الجديد الخاصة</div>
-                        <div class="system-name">نظام الامتحانات الإلكترونية</div>
-                    </div>
-                    <div class="card-footer">
-                        الكود الخاص بالطالب | الطالب مسجل في النظام الإلكتروني
-                    </div>
+                    <div class="serial-number">${student.serial}</div>
+                    <div class="student-name">${student.name}</div>
+                    <div class="student-code">${student.code}</div>
+                    <div class="school-name">مدرسة الجيل الجديد الخاصة</div>
+                    <div class="system-name">نظام الامتحانات الإلكترونية</div>
                 `;
                 
                 container.appendChild(card);
@@ -460,87 +352,173 @@
             window.print();
         });
 
-        // تبديل العرض بين أفقي وعمودي
-        document.getElementById('toggleViewBtn').addEventListener('click', () => {
-            const container = document.getElementById('cardsContainer');
-            container.classList.toggle('vertical-view');
-            
-            if (container.classList.contains('vertical-view')) {
-                container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
-                document.getElementById('toggleViewBtn').innerHTML = '<i class="fas fa-th-large"></i> العرض الشبكي';
-            } else {
-                container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
-                document.getElementById('toggleViewBtn').innerHTML = '<i class="fas fa-eye"></i> تبديل العرض';
-            }
-        });
-
-        // تصدير كملف PDF
-        document.getElementById('exportBtn').addEventListener('click', async () => {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            
-            const cards = document.querySelectorAll('.student-card');
-            const cardWidth = 85; // عرض الكارت بالمليمتر
-            const cardHeight = 55; // ارتفاع الكارت بالمليمتر
-            const margin = 10; // هامش الصفحة
-            const spacing = 5; // المسافة بين الكروت
-            
-            let x = margin;
-            let y = margin;
-            let page = 1;
-            
-            // زر التحميل يظهر نص تجريبي أثناء التحميل
-            const exportBtn = document.getElementById('exportBtn');
-            const originalText = exportBtn.innerHTML;
-            exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التصدير...';
-            exportBtn.disabled = true;
-            
-            try {
-                for (let i = 0; i < cards.length; i++) {
-                    // إذا تجاوز الارتفاع الحد الأقصى للصفحة، انتقل إلى الصفحة التالية
-                    if (y + cardHeight > 297 - margin) {
-                        pdf.addPage();
-                        page++;
-                        x = margin;
-                        y = margin;
-                    }
-                    
-                    // إذا تجاوز العرض الحد الأقصى للصفحة، انتقل إلى الصف التالي
-                    if (x + cardWidth > 210 - margin) {
-                        x = margin;
-                        y += cardHeight + spacing;
-                        
-                        // إذا تجاوز الارتفاع الحد الأقصى بعد الانتقال للصف الجديد، أضف صفحة جديدة
-                        if (y + cardHeight > 297 - margin) {
-                            pdf.addPage();
-                            page++;
-                            x = margin;
-                            y = margin;
+        // تصدير للهاتف - طريقة بسيطة تناسب الهاتف
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            // إنشاء صفحة طباعة مخصصة
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="ar" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>كروت الطلاب - تصدير</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                            font-family: 'Arial', sans-serif;
                         }
-                    }
-                    
-                    // استخدام html2canvas لالتقاط صورة للكارت
-                    const canvas = await html2canvas(cards[i]);
-                    const imgData = canvas.toDataURL('image/png');
-                    
-                    // إضافة الصورة إلى PDF
-                    pdf.addImage(imgData, 'PNG', x, y, cardWidth, cardHeight);
-                    
-                    // تحديث موضع الرسم للكارت التالي
-                    x += cardWidth + spacing;
-                }
-                
-                // حفظ ملف PDF
-                pdf.save('كروت_الطلاب_مدرسة_الجيل_الجديد.pdf');
-                
-            } catch (error) {
-                console.error('حدث خطأ أثناء التصدير:', error);
-                alert('حدث خطأ أثناء تصدير الملف. يرجى المحاولة مرة أخرى.');
-            } finally {
-                // استعادة حالة الزر
-                exportBtn.innerHTML = originalText;
-                exportBtn.disabled = false;
-            }
+                        
+                        body {
+                            padding: 15px;
+                            background: white;
+                        }
+                        
+                        .header {
+                            text-align: center;
+                            margin-bottom: 20px;
+                            padding: 15px;
+                            background: #1a237e;
+                            color: white;
+                            border-radius: 10px;
+                        }
+                        
+                        .header h1 {
+                            font-size: 1.5rem;
+                            margin-bottom: 8px;
+                        }
+                        
+                        .header h2 {
+                            font-size: 1.2rem;
+                            margin-bottom: 5px;
+                            color: #ffeb3b;
+                        }
+                        
+                        .cards-container {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 10px;
+                        }
+                        
+                        .student-card {
+                            background: white;
+                            border-radius: 10px;
+                            padding: 12px;
+                            border: 2px solid #1a237e;
+                            text-align: center;
+                            height: 180px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            page-break-inside: avoid;
+                        }
+                        
+                        .serial-number {
+                            align-self: flex-start;
+                            background: #1a237e;
+                            color: white;
+                            width: 24px;
+                            height: 24px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 0.8rem;
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        }
+                        
+                        .student-name {
+                            font-size: 0.9rem;
+                            color: #1a237e;
+                            margin-bottom: 10px;
+                            font-weight: bold;
+                            line-height: 1.2;
+                        }
+                        
+                        .student-code {
+                            font-size: 1.1rem;
+                            background: #4CAF50;
+                            color: white;
+                            padding: 6px 10px;
+                            border-radius: 6px;
+                            font-family: monospace;
+                            font-weight: bold;
+                            margin: 5px 0;
+                            letter-spacing: 1px;
+                        }
+                        
+                        .school-name {
+                            font-size: 0.8rem;
+                            color: #1a237e;
+                            margin-top: 5px;
+                            font-weight: bold;
+                        }
+                        
+                        .system-name {
+                            font-size: 0.7rem;
+                            color: #666;
+                            margin-top: 2px;
+                        }
+                        
+                        @media print {
+                            .header {
+                                display: none;
+                            }
+                            
+                            body {
+                                padding: 5px;
+                            }
+                            
+                            .cards-container {
+                                gap: 0;
+                            }
+                            
+                            .student-card {
+                                border: 1px solid #1a237e;
+                                height: 160px;
+                                margin: 2px;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>مدرسة الجيل الجديد الخاصة</h1>
+                        <h2>الصف الرابع الابتدائي</h2>
+                        <p>نظام الامتحانات الإلكترونية</p>
+                    </div>
+                    <div class="cards-container">
+            `);
+            
+            // إضافة جميع الكروت
+            students.forEach(student => {
+                printWindow.document.write(`
+                    <div class="student-card">
+                        <div class="serial-number">${student.serial}</div>
+                        <div class="student-name">${student.name}</div>
+                        <div class="student-code">${student.code}</div>
+                        <div class="school-name">مدرسة الجيل الجديد الخاصة</div>
+                        <div class="system-name">نظام الامتحانات الإلكترونية</div>
+                    </div>
+                `);
+            });
+            
+            printWindow.document.write(`
+                    </div>
+                    <script>
+                        // طباعة الصفحة بعد تحميلها مباشرة
+                        window.onload = function() {
+                            window.print();
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
         });
 
         // تهيئة الصفحة عند التحميل
